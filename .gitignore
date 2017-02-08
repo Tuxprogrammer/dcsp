@@ -1,0 +1,3 @@
+# This is the ignore list, anything listed here will
+# not make it into the repo unless manually added
+.idea/
