@@ -23,7 +23,7 @@ CREATE TABLE groups(
   PRIMARY KEY(groupId)
 );
 
-create TABLE member_of(
+CREATE TABLE member_of(
   ID BIGINT UNSIGNED UNIQUE NOT NULL,
   userId BIGINT UNSIGNED,
   groupId BIGINT UNSIGNED,
@@ -31,10 +31,22 @@ create TABLE member_of(
   PRIMARY KEY(ID)
 );
 
-create TABLE removed_from(
+CREATE TABLE removed_from(
   ID BIGINT UNSIGNED UNIQUE NOT NULL,
   userId BIGINT UNSIGNED,
   groupId BIGINT UNSIGNED,
 
   PRIMARY KEY(ID)
 );
+
+# There should be one of these queries executed when a new group is created, so that the group has a database to
+# store its messages and members in. The name should be "message_$groupId"
+#CREATE TABLE messages_template(
+# messageId BIGINT UNSIGNED UNIQUE NOT NULL,
+# from_USER BIGINT UNSIGNED,
+# mTimeStamp TIMESTAMP,
+# upvotes INT,
+# downvotes INT,
+# message VARCHAR(255),
+# PRIMARY KEY(messageId)
+#);
