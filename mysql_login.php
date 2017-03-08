@@ -6,7 +6,7 @@
  * Time: 5:21 PM
  */
 
-  $hostname = 'localhost';
+  $hostname = 'pluto.cse.msstate.edu';
   $db = 'sc2257';
   $username = 'sc2257';
   $password = 'dcsp_chat_password00';

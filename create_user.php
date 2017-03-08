@@ -65,13 +65,14 @@ try {
 
     // ADDING NEW USER
     // hash username, since it is unique and the hash function is unique as well
-    $userId = hash("sha512", $userName, true);
+    $userId = hash("sha512", $userName);
 
     // query to add new user
     $query = "INSERT INTO users (userId, uTimeStamp, userName, realName, emailAddress, phoneNumber, passwordHash,
                 avatarImage, banned, admin)
-              VALUES ($userId, NOW(), $userName, $realName, $emailAddress, $phoneNumber, $passwordHash, $avatarImage,
+              VALUES (cast(conv(\"$userId\", 16, 10) AS UNSIGNED INTEGER), NOW(), \"$userName\", \"$realName\", \"$emailAddress\", \"$phoneNumber\", \"$passwordHash\", \"$avatarImage\",
               0, 0)";
+    echo $query;
     $result = $conn->query($query);
     if (!$result)
         throw new Exception("Error adding new user to database. ".($conn->error));
