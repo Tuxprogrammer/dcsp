@@ -5,7 +5,7 @@ CREATE TABLE users(
   realName VARCHAR(128),
   emailAddress VARCHAR(128),
   phoneNumber VARCHAR(15),
-  passwordHash VARCHAR(128),
+  passwordHash VARCHAR(128) NOT NULL,
   avatarImage VARCHAR(255),
   banned TINYINT(1),
   admin TINYINT(1),

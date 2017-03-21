@@ -1,3 +1,4 @@
+<?php require_once 'assets/php/create_user.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
     <h1>Register for cHatter</h1>
-    <form method="POST" action="create_user.php">
+    <form method="POST" action="register.php">
         Username: <input name="username" type="text" required> <br>
         Password: <input name="password" type="password" required><br>
         Real Name: <input name="realName" type="text" required><br>

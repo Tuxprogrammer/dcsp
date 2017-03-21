@@ -6,7 +6,7 @@
  * Time: 9:37 PM
  */
 
-require_once 'mysql_login.php';
+require_once 'assets/php/mysql_login.php';
 try {
     $conn = new mysqli($hostname, $username, $password, $db);
     unset($hostname, $username, $password, $db);

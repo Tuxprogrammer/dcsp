@@ -10,3 +10,7 @@
 
 // Should have some sort of spam checking such that if the last x messages have been sent by the same user in a short
 // timespan, an alert is appended to the admin table.
+
+if(!empty($_POST)) {
+
+}
