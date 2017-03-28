@@ -16,6 +16,7 @@ CREATE TABLE users(
 CREATE TABLE groups(
   groupId BIGINT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
   groupName VARCHAR(128),
+  groupDesc VARCHAR(255),
   gTimeStamp TIMESTAMP,
   gType INT,
   creator BIGINT UNSIGNED,
