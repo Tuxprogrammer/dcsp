@@ -34,8 +34,8 @@ if (!empty($_POST)) {
         $creator = $_COOKIE["userId"];
 
         // Insert New Group into groups table
-        $query = "INSERT INTO groups (groupName, gTimeStamp, gType, creator)
-              VALUES (\"$groupName\", NOW(), \"$gType\", \"$creator\")";
+        $query = "INSERT INTO groups (groupName, groupDesc, gTimeStamp, gType, creator)
+              VALUES (\"$groupName\", \"\", NOW(), \"$gType\", \"$creator\")";
 
         echo $query;
         $result = $conn->query($query);
