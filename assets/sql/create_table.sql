@@ -1,7 +1,7 @@
 CREATE TABLE users(
   userId BIGINT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
   uTimeStamp TIMESTAMP,
-  userName VARCHAR(32),
+  userName VARCHAR(32) NOT NULL,
   realName VARCHAR(128),
   emailAddress VARCHAR(128),
   phoneNumber VARCHAR(15),
