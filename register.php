@@ -1,4 +1,4 @@
-<?php require_once 'assets/php/create_user.php' ?>
+<?php require_once __DIR__.'assets/php/create_user.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
