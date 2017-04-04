@@ -1,0 +1,1 @@
+INSERT INTO sc2257.messages_15 (fromUser, mTimeStamp, upvotes, downvotes, message) VALUES (7, '2017-03-21 16:30:36', 0, 0, '7 created the group asdf3.');
