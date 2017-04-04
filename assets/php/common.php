@@ -8,6 +8,7 @@
 require_once __DIR__.'/mysql_login.php';
 
 function lookupUserName($userId) {
+    global $conn;
     $query = "SELECT userId, userName FROM users WHERE userId=".$userId." LIMIT 1";
 
     $result = $conn->query($query);
@@ -19,5 +20,7 @@ function lookupUserName($userId) {
 
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['userName']) ? $row['userName'] : "";
 }
 

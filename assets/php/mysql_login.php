@@ -6,10 +6,12 @@
  * Time: 5:21 PM
  */
 
-  $hostname = 'localhost';
-  $db = 'sc2257';
-  $username = 'sc2257';
-  $password = 'dcsp_chat_password00';
+$hostname = 'localhost';
+$db = 'sc2257';
+$username = 'sc2257';
+$password = 'dcsp_chat_password00';
+
+$conn = null;
 
 try {
     $conn = new mysqli($hostname, $username, $password, $db);
