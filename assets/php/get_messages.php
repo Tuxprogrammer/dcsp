@@ -11,7 +11,7 @@
 require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
-if(isset($_POST)) {
+if(isset($_POST['reset'])) {
     setcookie("groupId", 0, time() - (24 * 60 * 60));
     header("Location: groups.php");
     die();
@@ -28,6 +28,7 @@ try {
     echo "<h1>Messages:</h1>";
 
     echo '<form action="messages.php" method="post">
+            <input type="hidden" name="reset" id="hiddenResetField">
             <button type="submit" class="btn-link" name="">Back</button>
           </form>';
 
