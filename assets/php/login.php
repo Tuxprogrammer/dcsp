@@ -11,18 +11,16 @@
 </head>
 <?php
 
-require_once 'assets/php/mysql_login.php';
+require_once __DIR__ . '/mysql_login.php';
 
 //Checks to see if session is already initiated (user is already logged in)
-  if(isset($_SESSION['userName'])){
-        if($_SESSION['type'] == 'user'){
-          header("Location: user_profile.php");
-        }
-        else{
-          header("Location: admin_profile.php");
-           }
-        }
-  else{
+if (isset($_SESSION['userName'])) {
+    if ($_SESSION['type'] == 'user') {
+        header("Location: user_profile.php");
+    } else {
+        header("Location: admin_profile.php");
+    }
+} else {
 
     $conn = new mysqli($hostname, $username, $password, $db);
     unset($hostname, $username, $password, $db);
@@ -31,75 +29,71 @@ require_once 'assets/php/mysql_login.php';
         throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 //Checks if username and password have been set
     if (isset($_POST['userName']) &&
-        isset($_POST['password']))
-    {
-      if($_SERVER['REQUEST_METHOD'] == "POST"){
-      $username = $_POST['username'];
-      $password = $_POST['password'];
+        isset($_POST['password'])
+    ) {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
         }
 
-    $un_temp = mysql_entities_fix_string($connection, $_POST['username']);
-    $pw_temp = mysql_entities_fix_string($connection, $_POST['password']);
-    $query = "SELECT * FROM users WHERE userName='$un_temp'";
-    $result = $connection-> query($query);
-    if (!result) die($connection->error);
-    elseif($result->num_rows)
-    {
-      $row = $result->fetch_array(MYSQLI_NUM);
-      $result->close();
+        $un_temp = mysql_entities_fix_string($conn, $_POST['username']);
+        $pw_temp = mysql_entities_fix_string($conn, $_POST['password']);
+        $query = "SELECT * FROM users WHERE userName='$un_temp'";
+        $result = $conn->query($query);
+        if (!$result) die($conn->error);
+        elseif ($result->num_rows) {
+            $row = $result->fetch_array(MYSQLI_NUM);
+            $result->close();
 
-      $salt1 = "k1RA*&";
-      $salt2 = "pg!@";
-      $token = hash('ripemd128', "$salt1$pw_temp$salt2");
 
-      if($token == row[6]){
-        session_start();
+            $token = hash('sha512', "$pw_temp");
 
-        $_SESSION['userName'] = $un_temp;
-        $_SESSION['realName'] = $row["realName"];
-        $_SESSION['userId']  = $row["userId"];
-        $_SESSION['admin'] = $row["admin"];
-        $_SESSION['banned'] = $row["banned"];
-        $_SESSION['avatarImage'] = $row["avatarImage"];
-        $_SESSION['phoneNumber'] = $row["phoneNumber"];
-        $_SESSION['emailAddress'] = $row["emailAddress"];
+            if ($token == $row[6]) {
+                session_start();
 
-        echo "Hi $row[3], you are now logged in as '$row[2]'";
-      }
-      else{
-        echo "<p>Invalid username/password comnination</p>";
-      }
+                $_SESSION['userName'] = $un_temp;
+                $_SESSION['realName'] = $row["realName"];
+                $_SESSION['userId'] = $row["userId"];
+                $_SESSION['admin'] = $row["admin"];
+                $_SESSION['banned'] = $row["banned"];
+                $_SESSION['avatarImage'] = $row["avatarImage"];
+                $_SESSION['phoneNumber'] = $row["phoneNumber"];
+                $_SESSION['emailAddress'] = $row["emailAddress"];
+
+                echo "Hi $row[3], you are now logged in as '$row[2]'";
+                setcookie("userId", $row["userId"], time() + 24 * 60 * 60);
+            } else {
+                echo "<p>Invalid username/password comnination</p>";
+            }
+        }
     }
-  }
-      $connection->close();
-    }
+    $conn->close();
+}
 
-    setcookie("userId", $row["userId"], time() + 24 * 60 * 60);
+function mysql_entities_fix_string($connection, $string)
+{
+    return htmlentities(mysql_fix_string($connection, $string));
+}
 
-    function mysql_entities_fix_string($connection, $string)
-    {
-      return htmlentities(mysql_fix_string($connection, $string));
-    }
-
-    function mysql_fix_string($connection, $string)
-    {
-      if (get_magic_quotes_gpc()) $string = stripslashes($string);
-      return $connection->real_escape_string($string);
-    }
+function mysql_fix_string($connection, $string)
+{
+    if (get_magic_quotes_gpc()) $string = stripslashes($string);
+    return $connection->real_escape_string($string);
+}
 
 ?>
 <h1>Welcome to <span style="font-style:italic; font-weight:bold; color: maroon">
             cHat</span>!</h1>
 
-    <p style="color: red">
+<p style="color: red">
     <!--Placeholder for error messages-->
-    </p>
+</p>
 
 <form method="post" action="login.php">
     <label>Username: </label>
-    <input type="text" name="userName" value = ""> <br>
+    <input type="text" name="userName" value=""> <br>
     <label>Password: </label>
-    <input type="password" name="password" value = ""> <br>
+    <input type="password" name="password" value=""> <br>
     <input type="submit" value="Log in">
 </form>
 
