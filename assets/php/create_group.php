@@ -7,15 +7,16 @@
  */
 
 if (!empty($_POST)) {
-    require_once __DIR__.'mysql_login.php';
+    require_once __DIR__.'/mysql_login.php';
+    require_once __DIR__.'/check_login.php';
 
     try {
-        $conn = new mysqli($hostname, $username, $password, $db);
-        unset($hostname, $username, $password, $db);
-
-        if ($conn->connect_error) {
-            throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
-        }
+//        $conn = new mysqli($hostname, $username, $password, $db);
+//        unset($hostname, $username, $password, $db);
+//
+//        if ($conn->connect_error) {
+//            throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+//        }
 
 
         if (!isset($_COOKIE['userId'])) {
@@ -82,12 +83,13 @@ if (!empty($_POST)) {
         }
 
         //Put initial message in the group
-        $fromUser = $_COOKIE['userId'];
-        $message = $fromUser . ' created the group ' . $groupName . '.';
+        $fromUserId = $_COOKIE['userId'];
+        $fromUserName = $_COOKIE['userName'];
+        $message = $fromUserName . ' created the group ' . $groupName . '.';
 
         $query = 'INSERT INTO messages_' . $groupId . "(fromUser,
               mTimeStamp, upvotes, downvotes, message)
-              VALUES (\"$fromUser\", NOW(), 0, 0, \"$message\")";
+              VALUES (\"$fromUserId\", NOW(), 0, 0, \"$message\")";
 
         echo $query;
         $result = $conn->query($query);
@@ -97,8 +99,9 @@ if (!empty($_POST)) {
 
         // Done
         echo '<h1>Group added successfully. Thanks!';
+        header("refresh:3; url=groups.php");
+        die();
 
-        //TODO: Redirect user to the new group's message board page.
     } catch (Exception $e) {
         echo "<h1>$e</h1>";
     }

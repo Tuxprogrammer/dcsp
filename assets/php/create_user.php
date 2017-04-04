@@ -6,15 +6,9 @@
  * Time: 5:20 PM
  */
 if (!empty($_POST)) {
-    require_once __DIR__.'mysql_login.php';
+    require_once __DIR__.'/mysql_login.php';
 
     try {
-        $conn = new mysqli($hostname, $username, $password, $db);
-        unset($hostname, $username, $password, $db);
-
-        if ($conn->connect_error) {
-            throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
-        }
 
         /*
          * userId BIGINT UNSIGNED UNIQUE NOT NULL,
