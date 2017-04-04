@@ -16,8 +16,6 @@ function lookupUserName($userId) {
         throw new Exception('Error checking for existing username. ' . $conn->error);
     }
 
-    $rows = $result->num_rows;
-
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 

@@ -8,11 +8,16 @@
 
 //TODO: This file should get all of the available groups to a user and print them in a ul list
 
-require_once 'mysql_login.php';
+require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
+if(isset($_GET['g']) && !empty($_GET['g']) && is_numeric($_GET['g'])) {
+    setcookie("groupId", $_GET["g"], time() + 24 * 60 * 60);
+
+    header("Location: messages.php");
+}
+
 try {
-    $conn = new mysqli($hostname, $username, $password, $db);
     unset($hostname, $username, $password, $db);
 
     if ($conn->connect_error)
@@ -43,9 +48,7 @@ try {
 
         echo '<td>' . $row2['message'] . '</td>';
 
-        setcookie("groupId", $row["groupId"], time() + 24 * 60 * 60);
-
-        echo '<td>' . "<a href=\"messages.php\">Select</a>" . '</td>';
+        echo '<td>' . "<a href=\"groups.php?g=".$row['groupId']."\">Select</a>" . '</td>';
         echo '</tr>';
     }
     echo "</table>";

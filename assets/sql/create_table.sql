@@ -42,12 +42,12 @@ CREATE TABLE removed_from(
 
 # There should be one of these queries executed when a new group is created, so that the group has a database to
 # store its messages and members in. The name should be "message_$groupId"
-#CREATE TABLE messages_template(
-# messageId BIGINT UNSIGNED UNIQUE NOT NULL,
+# CREATE TABLE messages_template(
+# messageId BIGINT UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
 # fromUser BIGINT UNSIGNED,
 # mTimeStamp TIMESTAMP,
 # upvotes INT,
 # downvotes INT,
 # message VARCHAR(255),
 # PRIMARY KEY(messageId)
-#);
+# );
