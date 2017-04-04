@@ -12,7 +12,7 @@ require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
 if(isset($_POST['reset'])) {
-    setcookie("groupId", 0, time() - (24 * 60 * 60));
+    $_SESSION["groupId"] = "";
     header("Location: groups.php");
     die();
 }
@@ -23,7 +23,7 @@ try {
     if ($conn->connect_error)
         throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 
-    echo "<h1>Logged in to group " . $_COOKIE["groupId"] . "</h1>";
+    echo "<h1>Logged in to group " . $_SESSION["groupId"] . "</h1>";
 
     echo "<h1>Messages:</h1>";
 
@@ -32,7 +32,7 @@ try {
             <button type="submit" class="btn-link" name="">Back</button>
           </form>';
 
-    $groupId = $_COOKIE["groupId"];
+    $groupId = $_SESSION["groupId"];
 
     $query = "SELECT * from messages_$groupId";
 

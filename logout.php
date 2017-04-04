@@ -7,3 +7,7 @@
  */
 
 // TODO: Add stuff to do the logout thing here.
+
+session_start();
+session_unset();
+session_destroy();

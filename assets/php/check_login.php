@@ -8,9 +8,12 @@
  * Time: 4:02 PM
  */
 
+session_start();
+
 require_once 'mysql_login.php';
 
-if(!(isset($_COOKIE['userId']) && (isset($_COOKIE['userName'])))) {
+if(!(isset($_SESSION['userId']) && (isset($_SESSION['userName'])))) {
     echo "Not Logged In, please login in <a href=\"login.php\">here</a>.";
     die();
 }
+

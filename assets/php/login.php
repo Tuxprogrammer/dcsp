@@ -11,7 +11,8 @@
 </head>
 <?php
 
-require_once __DIR__ . '/mysql_login.php';
+session_start();
+require_once __DIR__.'/mysql_login.php';
 
 //Checks to see if session is already initiated (user is already logged in)
 if (isset($_SESSION['userName'])) {
@@ -61,7 +62,6 @@ if (isset($_SESSION['userName'])) {
                 $_SESSION['emailAddress'] = $row["emailAddress"];
 
                 echo "Hi $row[3], you are now logged in as '$row[2]'";
-                setcookie("userId", $row["userId"], time() + 24 * 60 * 60);
             } else {
                 echo "<p>Invalid username/password comnination</p>";
             }

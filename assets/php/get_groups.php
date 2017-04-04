@@ -12,7 +12,7 @@ require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
 if(isset($_GET['g']) && !empty($_GET['g']) && is_numeric($_GET['g'])) {
-    setcookie("groupId", $_GET["g"], time() + 24 * 60 * 60);
+    $_SESSION["groupId"] = $_GET["g"];
 
     header("Location: messages.php");
 }

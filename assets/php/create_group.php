@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 //        }
 
 
-        if (!isset($_COOKIE['userId'])) {
+        if (!isset($_SESSION['userId'])) {
             throw new Exception('Not Logged In, please login in <a href="login.php">here</a>.');
         }
 
@@ -34,7 +34,7 @@ if (!empty($_POST)) {
         $groupName = isset($_POST['groupName']) ? (string)$_POST['groupName'] : "";
 
         $gType = isset($_POST['gType']) ? $_POST['gType'] : "";
-        $creator = $_COOKIE['userId'];
+        $creator = $_SESSION['userId'];
 
         // Insert New Group into groups table
         $query = "INSERT INTO groups (groupName, groupDesc, gTimeStamp, gType, creator)
@@ -83,8 +83,8 @@ if (!empty($_POST)) {
         }
 
         //Put initial message in the group
-        $fromUserId = $_COOKIE['userId'];
-        $fromUserName = $_COOKIE['userName'];
+        $fromUserId = $_SESSION['userId'];
+        $fromUserName = $_SESSION['userName'];
         $message = $fromUserName . ' created the group ' . $groupName . '.';
 
         $query = 'INSERT INTO messages_' . $groupId . "(fromUser,

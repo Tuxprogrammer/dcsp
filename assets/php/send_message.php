@@ -21,7 +21,6 @@ if(!empty($_POST)) {
     if ($conn->connect_error)
         throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 
-
     /*
      * messageId BIGINT UNSIGNED UNIQUE NOT NULL,
      * fromUser BIGINT UNSIGNED,
@@ -34,7 +33,7 @@ if(!empty($_POST)) {
 
     $message = isset($_POST["message"]) ? (string)$_POST["message"] : "";
 
-    $fromUser = $_COOKIE["userId"];
+    $fromUser = $_SESSION["userId"];
 
     // Insert New Group into groups table
     $query = "INSERT INTO groups (fromUser, mTimeStamp, upvotes, downvotes, message)

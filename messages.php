@@ -12,7 +12,7 @@
 <body>
 <?php
 
-if(!isset($_COOKIE['groupId'])) {
+if(!isset($_SESSION['groupId'])) {
     header("Location: groups.php");
     die;
 }
