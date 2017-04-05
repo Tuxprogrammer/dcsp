@@ -37,3 +37,14 @@ function lookupUserId($userName) {
     return isset($row['userId']) ? $row['userId'] : "";
 }
 
+function mysql_entities_fix_string($connection, $string)
+{
+    return htmlentities(mysql_fix_string($connection, $string));
+}
+
+function mysql_fix_string($connection, $string)
+{
+    global $conn;
+    if (get_magic_quotes_gpc()) $string = stripslashes($string);
+    return $conn->real_escape_string($string);
+}

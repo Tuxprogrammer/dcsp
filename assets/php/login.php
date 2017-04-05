@@ -48,7 +48,9 @@ if (isset($_SESSION['userName'])) {
                 $_SESSION['phoneNumber'] = $row["phoneNumber"];
                 $_SESSION['emailAddress'] = $row["emailAddress"];
 
-                echo "Hi ".$row['realName'].", you are now logged in as ".$row['username'];
+                //echo "Hi ".$row['realName'].", you are now logged in as ".$row['username'];
+
+                header("Location: groups.php");
             } else {
                 echo "<p>Invalid username/password combination</p>";
             }
@@ -56,17 +58,3 @@ if (isset($_SESSION['userName'])) {
     }
     $conn->close();
 }
-
-function mysql_entities_fix_string($connection, $string)
-{
-    return htmlentities(mysql_fix_string($connection, $string));
-}
-
-function mysql_fix_string($connection, $string)
-{
-    global $conn;
-    if (get_magic_quotes_gpc()) $string = stripslashes($string);
-    return $conn->real_escape_string($string);
-}
-
-?>
