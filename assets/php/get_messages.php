@@ -37,7 +37,7 @@ if(isset($_POST['action']) && $_POST['action'] == "upvote") {
 
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
-    
+
     //increment & update
     $votes = $row['upvotes'] + 1;
 
@@ -67,8 +67,8 @@ if(isset($_POST['action']) && $_POST['action'] == "downvote") {
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    //deccrement & update
-    $votes = $row['downvotes'] - 1;
+    //decrement & update
+    $votes = $row['downvotes'] + 1;
 
     $query = "UPDATE messages_".$_SESSION['groupId']." SET downvotes=\"$votes\" WHERE messageId=\"".$_POST['id']."\"";
 
@@ -117,7 +117,7 @@ try {
             '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="upvote">
             <input type="hidden" name="id" value="'.$row['messageId'].'">
-            <button type="submit" class="btn-link" name="">^</button>
+            <button type="submit" class="btn-link" name="">&#9650;</button>
           </form>' .
             $row['upvotes'] .
             '/' .
@@ -125,8 +125,7 @@ try {
             '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="downvote">
             <input type="hidden" name="id" value="'.$row['messageId'].'">
-            <input type="hidden" name="action" value="upvote">
-            <button type="submit" class="btn-link" name="">v</button>
+            <button type="submit" class="btn-link" name="">&#9660;</button>
           </form>' . '</td>';
         echo '</tr>';
     }
