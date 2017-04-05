@@ -23,6 +23,64 @@ if(isset($_POST['action']) && $_POST['action'] == "reset") {
     die();
 }
 
+if(isset($_POST['action']) && $_POST['action'] == "upvote") {
+    if(!isset($_POST["id"]))
+        die();
+
+    //get old vote count
+    $query = "SELECT upvotes FROM messages_".$_SESSION['groupId']." WHERE messageId=\"".$_POST["id"]."\" LIMIT 1";
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for votes.' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    
+    //increment & update
+    $votes = $row['upvotes'] + 1;
+
+    $query = "UPDATE messages_".$_SESSION['groupId']." SET upvotes=\"$votes\" WHERE messageId=\"".$_POST['id']."\"";
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error updating votes.' . $conn->error);
+    }
+
+    header("Location: messages.php");
+    die();
+}
+
+if(isset($_POST['action']) && $_POST['action'] == "downvote") {
+    if(!isset($_POST["id"]))
+        die();
+
+    //get old vote count
+    $query = "SELECT downvotes FROM messages_".$_SESSION['groupId']." WHERE messageId=\"".$_POST["id"]."\" LIMIT 1";
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for votes.' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    //deccrement & update
+    $votes = $row['downvotes'] - 1;
+
+    $query = "UPDATE messages_".$_SESSION['groupId']." SET downvotes=\"$votes\" WHERE messageId=\"".$_POST['id']."\"";
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error updating votes.' . $conn->error);
+    }
+
+    header("Location: messages.php");
+    die();
+}
+
 try {
     unset($hostname, $username, $password, $db);
 
@@ -55,7 +113,21 @@ try {
         echo '<tr>';
         echo '<td>' . $row['fromUser'] . '</td>';
         echo '<td>' . $row['message'] . '</td>';
-        echo '<td>' . $row['upvotes'] . '/' . $row['downvotes'] . '</td>';
+        echo '<td>' .
+            '<form action="messages.php" method="post">
+            <input type="hidden" name="action" value="upvote">
+            <input type="hidden" name="id" value="'.$row['messageId'].'">
+            <button type="submit" class="btn-link" name="">^</button>
+          </form>' .
+            $row['upvotes'] .
+            '/' .
+            $row['downvotes'] .
+            '<form action="messages.php" method="post">
+            <input type="hidden" name="action" value="downvote">
+            <input type="hidden" name="id" value="'.$row['messageId'].'">
+            <input type="hidden" name="action" value="upvote">
+            <button type="submit" class="btn-link" name="">v</button>
+          </form>' . '</td>';
         echo '</tr>';
     }
     echo "</table>";
