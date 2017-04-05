@@ -41,7 +41,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
     if(!empty($row['userId'])) {
-        echo "<h1>User is already a member of this group.</h1>";
+        echo '<h1>User is already a member of this group.</h1>';
         die();
     }
 

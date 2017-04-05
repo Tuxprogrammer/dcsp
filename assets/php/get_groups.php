@@ -31,7 +31,7 @@ try {
 
     $rows = $result->num_rows;
 
-    echo "<table><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th>";
+    echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
         $row = $result->fetch_array(MYSQLI_ASSOC);
