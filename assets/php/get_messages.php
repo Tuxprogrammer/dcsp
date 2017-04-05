@@ -11,7 +11,13 @@
 require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
-if(isset($_POST['reset'])) {
+
+if(!isset($_SESSION['groupId'])) {
+    header("Location: groups.php");
+    die;
+}
+
+if(isset($_POST['action']) && $_POST['action'] == "reset") {
     $_SESSION["groupId"] = "";
     header("Location: groups.php");
     die();
@@ -28,7 +34,7 @@ try {
     echo "<h1>Messages:</h1>";
 
     echo '<form action="messages.php" method="post">
-            <input type="hidden" name="reset" id="hiddenResetField">
+            <input type="hidden" name="action" value="reset">
             <button type="submit" class="btn-link" name="">Back</button>
           </form>';
 

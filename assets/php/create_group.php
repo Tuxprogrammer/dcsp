@@ -84,7 +84,7 @@ if (!empty($_POST)) {
 
         //Put initial message in the group
         $fromUserId = $_SESSION['userId'];
-        $fromUserName = $_SESSION['userName'];
+        $fromUserName = $_COOKIE['userName'];
         $message = $fromUserName . ' created the group ' . $groupName . '.';
 
         $query = 'INSERT INTO messages_' . $groupId . "(fromUser,

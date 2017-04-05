@@ -11,13 +11,8 @@
 </head>
 <body>
 <?php
-
-if(!isset($_SESSION['groupId'])) {
-    header("Location: groups.php");
-    die;
-}
-
 require_once 'assets/php/get_messages.php';
+require_once 'assets/php/add_user.php';
 ?>
 </body>
 </html>
