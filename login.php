@@ -1,37 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Log in to cHat</title>
-    <style>
-        input {
-            margin-bottom: 0.5em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/login-style.css">
 </head>
 <body>
-<?php
+  <header class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="container">
+      <div class="d-flex justify-content-between hidden-lg-up">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">cHat</a>
+      </div>
 
-require_once 'assets/php/login.php';
-?>
-<h1>Welcome to <span style="font-style:italic; font-weight:bold; color: maroon">
-            cHat</span>!</h1>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.php">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-<p style="color: red">
-    <!--Placeholder for error messages-->
-</p>
+  <div class="bg-pageheader">
+    <div class="container">
+      <h1>Login to cHat</h1>
+      <h3>cause its what cool kids do</h3>
+    </div>
+  </div>
 
-<form method="post" action="login.php">
-    <label>Username: </label>
-    <input type="text" name="userName" value=""> <br>
-    <label>Password: </label>
-    <input type="password" name="password" value=""> <br>
-    <input type="submit" value="Log in">
-</form>
+  <?php require_once 'assets/php/login.php' ?>
 
-<p style="font-style:italic">
-    BROOO<br><br>
-    create account link
-</p>
+  <div class="container" id="login-form">
+    <div class="row justify-content-center">
+      <form class="form-horizontal col-xs-12 col-lg-8" method="POST" action="login.php">
+        <div class="form-group">
+          <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username"
+                 value="">
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group text-center">
+          <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+          <label for="remember"> Remember Me</label>
+        </div>
+        <div class="form-group">
+          <div class="row justify-content-center">
+            <div class="col-sm-6">
+              <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login"
+                     value="Log In">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-center">
+                <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

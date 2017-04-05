@@ -2,6 +2,7 @@
 session_start();
 
 require_once __DIR__.'/mysql_login.php';
+require_once __DIR__.'/common.php';
 
 //Checks to see if session is already initiated (user is already logged in)
 if (isset($_SESSION['userName'])) {
