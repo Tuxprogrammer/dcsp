@@ -64,8 +64,9 @@ function mysql_entities_fix_string($connection, $string)
 
 function mysql_fix_string($connection, $string)
 {
+    global $conn;
     if (get_magic_quotes_gpc()) $string = stripslashes($string);
-    return $connection->real_escape_string($string);
+    return $conn->real_escape_string($string);
 }
 
 ?>
