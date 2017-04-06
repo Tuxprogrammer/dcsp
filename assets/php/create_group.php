@@ -6,9 +6,10 @@
  * Time: 5:20 PM
  */
 
-if (!empty($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__.'/mysql_login.php';
     require_once __DIR__.'/check_login.php';
+    require_once __DIR__.'/common.php';
 
     try {
 //        $conn = new mysqli($hostname, $username, $password, $db);
@@ -82,20 +83,12 @@ if (!empty($_POST)) {
             throw new Exception('Error adding new group to database. ' . $conn->error);
         }
 
-        //Put initial message in the group
+
         $fromUserId = $_SESSION['userId'];
-        $fromUserName = $_COOKIE['userName'];
+        $fromUserName = $_SESSION['userName'];
         $message = $fromUserName . ' created the group ' . $groupName . '.';
 
-        $query = 'INSERT INTO messages_' . $groupId . "(fromUser,
-              mTimeStamp, upvotes, downvotes, message)
-              VALUES (\"$fromUserId\", NOW(), 0, 0, \"$message\")";
-
-        echo $query;
-        $result = $conn->query($query);
-        if (!$result) {
-            throw new Exception('Error adding new group to database. ' . $conn->error);
-        }
+        send_message($fromUserId, $groupId, $message);
 
         // Done
         echo '<h1>Group added successfully. Thanks!';

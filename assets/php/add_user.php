@@ -6,7 +6,7 @@
  * Time: 3:57 PM
  */
 
-if (isset($_POST['action']) && $_POST['action'] == "add") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === "add") {
     require_once 'mysql_login.php';
     require_once 'check_login.php';
     require_once 'common.php';

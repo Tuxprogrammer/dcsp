@@ -48,3 +48,32 @@ function mysql_fix_string($connection, $string)
     if (get_magic_quotes_gpc()) $string = stripslashes($string);
     return $conn->real_escape_string($string);
 }
+
+function send_message($userId, $groupId, $message) {
+    require_once __DIR__.'/mysql_login.php';
+    require_once __DIR__.'/check_login.php';
+    global $conn;
+
+    if ($conn->connect_error)
+        throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
+
+    /*
+     * messageId BIGINT UNSIGNED UNIQUE NOT NULL,
+     * fromUser BIGINT UNSIGNED,
+     * mTimeStamp TIMESTAMP,
+     * upvotes INT,
+     * downvotes INT,
+     * message VARCHAR(255)
+     *
+     */
+
+    // Insert New Group into groups table
+    $query = "INSERT INTO messages_".$groupId." (fromUser, mTimeStamp, upvotes, downvotes, message)
+              VALUES (\"$userId\", NOW(), \"0\", \"0\", \"$message\")";
+
+    echo $query;
+    $result = $conn->query($query);
+    if (!$result)
+        throw new Exception("Error adding new message to database. " . ($conn->error));
+
+}
