@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once __DIR__.'/mysql_login.php';
-require_once __DIR__.'/common.php';
+require_once __DIR__ . '/mysql_login.php';
+require_once __DIR__ . '/common.php';
 
 //Checks to see if session is already initiated (user is already logged in)
 if (isset($_SESSION['userName'])) {
@@ -14,16 +14,15 @@ if (isset($_SESSION['userName'])) {
     if ($conn->connect_error)
         throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 //Checks if username and password have been set
-    if (isset($_POST['userName']) &&
+    if ($_SERVER['REQUEST_METHOD'] == "POST" &&
+        isset($_POST['username']) &&
         isset($_POST['password'])
     ) {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $username = $_POST['userName'];
-            $password = $_POST['password'];
-        }
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-        $un_temp = mysql_entities_fix_string($conn, $_POST['userName']);
-        $pw_temp = mysql_entities_fix_string($conn, $_POST['password']);
+        $un_temp = mysql_entities_fix_string($conn, $username);
+        $pw_temp = mysql_entities_fix_string($conn, $password);
         $query = "SELECT * FROM users WHERE userName='$un_temp'";
         $result = $conn->query($query);
         if (!$result) die($conn->error);

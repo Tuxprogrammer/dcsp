@@ -1,4 +1,3 @@
-<?php require_once __DIR__ . '/assets/php/create_user.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,7 @@
   <link rel="stylesheet" href="./assets/css/register-style.css">
 </head>
 <body>
+<?php require_once __DIR__ . '/assets/php/create_user.php' ?>
   <header class="navbar navbar-toggleable-md navbar-light bg-faded">
     <nav class="container">
       <div class="d-flex justify-content-between hidden-lg-up">
@@ -52,31 +52,31 @@
         <div class="form-group row">
           <label for="username-input" class="col-xs-4 col-lg-2 col-form-label">Username</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="text" id="username">
+            <input class="form-control" type="text" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""; ?>" >
           </div>
         </div>
         <div class="form-group row">
           <label for="password-input" class="col-xs-4 col-lg-2 col-form-label">Password</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="password" id="password">
+            <input class="form-control" type="password" name="password">
           </div>
         </div>
         <div class="form-group row">
           <label for="realname-input" class="col-xs-4 col-lg-2 col-form-label">Real Name</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="text" id="realname">
+            <input class="form-control" type="text" name="realname" value="<?php echo isset($_POST['realname']) ? $_POST['realname'] : ""; ?>">
           </div>
         </div>
         <div class="form-group row">
           <label for="email-input" class="col-xs-4 col-lg-2 col-form-label">Email Address</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="email" id="email">
+            <input class="form-control" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""; ?>">
           </div>
         </div>
         <div class="form-group row">
           <label for="phone-number-input" class="col-xs-4 col-lg-2 col-form-label">Phone Number</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="tel" id="phone-number">
+            <input class="form-control" type="tel" name="phone-number" value="<?php echo isset($_POST['phone-number']) ? $_POST['phone-number'] : ""; ?>">
           </div>
         </div>
         <div class="form-group row justify-content-center">
