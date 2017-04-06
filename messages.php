@@ -11,7 +11,7 @@
     <style>
         td, th {
             border: 1px solid black;
-            padding: 1em 1em 1em 1em;
+            padding: 0;
         }
 
         a {
@@ -61,6 +61,7 @@
     <div class="container">
         <?php
         require_once 'assets/php/get_messages.php';
+        require_once 'assets/php/send_message.php';
         require_once 'assets/php/add_user.php';
         ?>
     </div>

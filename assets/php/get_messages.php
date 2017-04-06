@@ -17,13 +17,13 @@ if(!isset($_SESSION['groupId'])) {
     die;
 }
 
-if(isset($_POST['action']) && $_POST['action'] == "reset") {
+if(isset($_POST['action']) && $_POST['action'] === "reset") {
     $_SESSION["groupId"] = "";
     header("Location: groups.php");
     die();
 }
 
-if(isset($_POST['action']) && $_POST['action'] == "upvote") {
+if(isset($_POST['action']) && $_POST['action'] === "upvote") {
     if(!isset($_POST["id"]))
         die();
 
@@ -52,7 +52,7 @@ if(isset($_POST['action']) && $_POST['action'] == "upvote") {
     die();
 }
 
-if(isset($_POST['action']) && $_POST['action'] == "downvote") {
+if(isset($_POST['action']) && $_POST['action'] === "downvote") {
     if(!isset($_POST["id"]))
         die();
 

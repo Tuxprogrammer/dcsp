@@ -11,37 +11,25 @@
 // Should have some sort of spam checking such that if the last x messages have been sent by the same user in a short
 // timespan, an alert is appended to the admin table.
 
-if(!empty($_POST)) {
-    require_once __DIR__.'/mysql_login.php';
-    require_once __DIR__.'/check_login.php';
+require_once __DIR__.'/mysql_login.php';
+require_once __DIR__.'/check_login.php';
+require_once __DIR__.'/common.php';
 
-    $conn = new mysqli($hostname, $username, $password, $db);
-    unset($hostname, $username, $password, $db);
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === "send") {
+    if(isset($_POST['userId']) && isset($_POST['groupId']) && isset($_POST['message'])) {
+        $fromUserId = $_POST['userId'];
+        $groupId = $_POST['groupId'];
+        $message = $_POST['message'];
 
-    if ($conn->connect_error)
-        throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
+        send_message($fromUserId, $groupId, $message);
 
-    /*
-     * messageId BIGINT UNSIGNED UNIQUE NOT NULL,
-     * fromUser BIGINT UNSIGNED,
-     * mTimeStamp TIMESTAMP,
-     * upvotes INT,
-     * downvotes INT,
-     * message VARCHAR(255)
-     *
-     */
-
-    $message = isset($_POST["message"]) ? (string)$_POST["message"] : "";
-
-    $fromUser = $_SESSION["userId"];
-
-    // Insert New Group into groups table
-    $query = "INSERT INTO groups (fromUser, mTimeStamp, upvotes, downvotes, message)
-              VALUES (\"$fromUser\", NOW(), \"0\", \"0\", \"$message\")";
-
-    echo $query;
-    $result = $conn->query($query);
-    if (!$result)
-        throw new Exception("Error adding new message to database. " . ($conn->error));
-
+    }
+    header('Location: messages.php');
 }
+echo "<form action=\"messages.php\" method=\"post\">
+            <input type=\"hidden\" name=\"action\" value=\"send\">
+            <input type=\"hidden\" name=\"userId\" value=\"".$_SESSION['userId']."\">
+            <input type=\"hidden\" name=\"groupId\" value=\"".$_SESSION['groupId']."\">
+            <input type=\"text\" name=\"message\" required>
+            <button type=\"submit\" class=\"btn-link\" name=\"\">Send</button>
+          </form>";
