@@ -5,7 +5,8 @@
  * Date: 3/7/17
  * Time: 5:20 PM
  */
-if (!empty($_POST)) {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__.'/mysql_login.php';
 
     try {
@@ -26,10 +27,18 @@ if (!empty($_POST)) {
         $userName = isset($_POST['username']) ? (string)$_POST['username'] : "";
         // $uTimeStamp         = ""; //This doesn't matter
         $passwordHash = isset($_POST['password']) ? hash('sha512', $_POST['password'], true) : "";
-        $realName = isset($_POST['realName']) ? (string)$_POST['realName'] : "";
-        $emailAddress = isset($_POST['emailAddress']) ? (string)$_POST['emailAddress'] : "";
-        $phoneNumber = isset($_POST['phoneNumber']) ? (string)$_POST['phoneNumber'] : "";
+        $realName = isset($_POST['realname']) ? (string)$_POST['realname'] : "";
+        $emailAddress = isset($_POST['email']) ? (string)$_POST['email'] : "";
+        $phoneNumber = isset($_POST['phone-number']) ? (string)$_POST['phone-number'] : "";
         $avatarImage = isset($_POST['avatarImage']) ? (string)$_POST['avatarImage'] : "";
+
+        echo $userName."<br>".
+$passwordHash."<br>".
+$realName."<br>".
+$emailAddress."<br>".
+$phoneNumber ."<br>".
+$avatarImage."<br>";
+
 
         // DATA VALIDATION
         // check for blank parameters
@@ -84,8 +93,10 @@ if (!empty($_POST)) {
         }
 
         // Done
-        echo '<h1>User added successfully. Thanks!';
+        //echo '<h1>User added successfully. Thanks!';
 
+        // TODO: Implement user profile page, and redirect user to there, as well as log them in
+        header("Location: login.php");
     } catch (Exception $e) {
         echo "<h1>$e</h1>";
     }
