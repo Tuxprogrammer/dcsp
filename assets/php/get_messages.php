@@ -106,7 +106,7 @@ try {
 
     $rows = $result->num_rows;
 
-    echo "<table><th>User</th><th>Message</th><th>up/down</th>";
+    echo "<table><tr><th>User</th><th>Message</th><th>up/down</th></tr>";
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
         $row = $result->fetch_array(MYSQLI_ASSOC);

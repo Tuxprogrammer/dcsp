@@ -41,10 +41,10 @@ function lookupUserId($userName)
 
 function mysql_entities_fix_string($connection, $string)
 {
-    return htmlentities(mysql_fix_string($connection, $string));
+    return htmlentities(mysql_fix_string($string));
 }
 
-function mysql_fix_string($connection, $string)
+function mysql_fix_string($string)
 {
     global $conn;
     if (get_magic_quotes_gpc()) $string = stripslashes($string);
@@ -83,12 +83,15 @@ function send_message($userId, $groupId, $message)
 
 function checkBlank($field, $type)
 {
+    $errorText = "";
+    $error = false;
+
     //name is blank
-    if (empty($value)) {
+    if (empty($field)) {
         $errorText = $type . " cannot be blank.";
         $error = true;
-        return array('error' => $error, 'errorText' => $errorText);
     }
+    return array('error' => $error, 'errorText' => $errorText);
 }
 
 function checkInvalidChars(&$field, $type)
@@ -114,6 +117,8 @@ function checkInvalidChars(&$field, $type)
                 $errorText = "Invalid phone number";
                 $error = true;
             }
+
+            break;
         default:
             break;
     }
