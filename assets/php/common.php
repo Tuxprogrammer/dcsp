@@ -5,11 +5,12 @@
  * Date: 4/4/2017
  * Time: 4:16 PM
  */
-require_once __DIR__.'/mysql_login.php';
+require_once __DIR__ . '/mysql_login.php';
 
-function lookupUserName($userId) {
+function lookupUserName($userId)
+{
     global $conn;
-    $query = "SELECT userId, userName FROM users WHERE userId=".$userId." LIMIT 1";
+    $query = "SELECT userId, userName FROM users WHERE userId=" . $userId . " LIMIT 1";
 
     $result = $conn->query($query);
     if (!$result) {
@@ -22,9 +23,10 @@ function lookupUserName($userId) {
     return isset($row['userName']) ? $row['userName'] : "";
 }
 
-function lookupUserId($userName) {
+function lookupUserId($userName)
+{
     global $conn;
-    $query = "SELECT userId, userName FROM users WHERE userName=\"".$userName."\" LIMIT 1";
+    $query = "SELECT userId, userName FROM users WHERE userName=\"" . $userName . "\" LIMIT 1";
 
     $result = $conn->query($query);
     if (!$result) {
@@ -49,9 +51,10 @@ function mysql_fix_string($connection, $string)
     return $conn->real_escape_string($string);
 }
 
-function send_message($userId, $groupId, $message) {
-    require_once __DIR__.'/mysql_login.php';
-    require_once __DIR__.'/check_login.php';
+function send_message($userId, $groupId, $message)
+{
+    require_once __DIR__ . '/mysql_login.php';
+    require_once __DIR__ . '/check_login.php';
     global $conn;
 
     if ($conn->connect_error)
@@ -68,7 +71,7 @@ function send_message($userId, $groupId, $message) {
      */
 
     // Insert New Group into groups table
-    $query = "INSERT INTO messages_".$groupId." (fromUser, mTimeStamp, upvotes, downvotes, message)
+    $query = "INSERT INTO messages_" . $groupId . " (fromUser, mTimeStamp, upvotes, downvotes, message)
               VALUES (\"$userId\", NOW(), \"0\", \"0\", \"$message\")";
 
     echo $query;
@@ -76,4 +79,77 @@ function send_message($userId, $groupId, $message) {
     if (!$result)
         throw new Exception("Error adding new message to database. " . ($conn->error));
 
+}
+
+function checkBlank($field, $type)
+{
+    //name is blank
+    if (empty($value)) {
+        $errorText = $type . " cannot be blank.";
+        $error = true;
+        return array('error' => $error, 'errorText' => $errorText);
+    }
+}
+
+function checkInvalidChars(&$field, $type)
+{
+    $errorText = "";
+    $error = false;
+    switch ($type) {
+        case "userName" || "realName":
+            if (!preg_match("/^[a-zA-Z ]*$/", $field)) {
+                $errorText = "Only letters and/or white space are allowed";
+                $error = true;
+            }
+            break;
+        case "emailAddress":
+            if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
+                $errorText = "Invalid email format";
+                $error = true;
+            }
+            break;
+        case "phoneNumber":
+            $field = preg_replace('/[^0-9]+/', '', $field);
+            if(strlen($field) > 12) {
+                $errorText = "Invalid phone number";
+                $error = true;
+            }
+        default:
+            break;
+    }
+    return array('error' => $error, 'errorText' => $errorText);
+}
+
+function validateField(&$field, $type = "")
+{
+    global $conn;
+    $field = $conn->real_escape_string($field);
+    $errorText = "";
+    $error = false;
+
+    switch ($type) {
+        case "userName" || "realName" || "emailAddress" || "phoneNumber":
+            //name is blank
+            $errors = checkBlank($field, $type);
+            if ($errors['error']) return $errors;
+
+            //Name contains invalid characters
+            $errors = checkInvalidChars($field, $type);
+            if ($errors['error']) return $errors;
+
+            break;
+
+        case "password":
+            //passsword is blank
+            $errors = checkBlank($field, $type);
+            if ($errors['error']) return $errors;
+
+            break;
+
+        default:
+
+            break;
+    }
+
+    return array('error' => $error, 'errorText' => $errorText);
 }

@@ -32,13 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phoneNumber = isset($_POST['phone-number']) ? (string)$_POST['phone-number'] : "";
         $avatarImage = isset($_POST['avatarImage']) ? (string)$_POST['avatarImage'] : "";
 
-        echo $userName."<br>".
-$passwordHash."<br>".
-$realName."<br>".
-$emailAddress."<br>".
-$phoneNumber ."<br>".
-$avatarImage."<br>";
-
+        foreach (array('userName' => $userName,
+                     'password' => $passwordHash,
+                     'realName' => $realName,
+                     'emailAddress' => $emailAddress,
+                     'phoneNumber' => $phoneNumber,
+                     ) as $type => $field) {
+            $errors = validateField($field, $type);
+            if ($errors['error']) {
+                echo $errors['errorText'];
+                die();
+            }
+        }
 
         // DATA VALIDATION
         // check for blank parameters

@@ -23,6 +23,15 @@ if (isset($_SESSION['userName'])) {
 
         $un_temp = mysql_entities_fix_string($conn, $username);
         $pw_temp = mysql_entities_fix_string($conn, $password);
+
+        foreach (array('userName' => $username, 'password' => $password) as $type => $field) {
+            $errors = validateField($field, $type);
+            if ($errors['error']) {
+                echo $errors['errorText'];
+                die();
+            }
+        }
+
         $query = "SELECT * FROM users WHERE userName='$un_temp'";
         $result = $conn->query($query);
         if (!$result) die($conn->error);
