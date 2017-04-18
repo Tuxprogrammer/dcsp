@@ -70,6 +70,8 @@ function send_message($userId, $groupId, $message)
      *
      */
 
+    $message = addslashes($message);
+
     // Insert New Group into groups table
     $query = "INSERT INTO messages_" . $groupId . " (fromUser, mTimeStamp, upvotes, downvotes, message)
               VALUES (\"$userId\", NOW(), \"0\", \"0\", \"$message\")";
@@ -157,4 +159,19 @@ function validateField(&$field, $type = "")
     }
 
     return array('error' => $error, 'errorText' => $errorText);
+}
+
+function uidInGroup($userId, $groupId) {
+    global $conn;
+    $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId='.$groupId.' LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for existing username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['userId']) ? $row['userId'] : "";
 }
