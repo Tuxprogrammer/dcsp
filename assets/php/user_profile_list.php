@@ -9,13 +9,15 @@
 
 require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
+require_once __DIR__.'/common.php';
 
-$query = "SELECT userId FROM member_of WHERE groupId = \"".$_SESSION['groupId']."\"";
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $query = "SELECT userId FROM member_of WHERE groupId = \"" . $_SESSION['groupId'] . "\"";
 
-$result = $conn->query($query);
-if (!$result) {
-    throw new Exception('Error collecting user profiles from database.' . $conn->error);
-}
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error collecting user profiles from database.' . $conn->error);
+    }
 
 //$result->data_seek(0);
 //$row = $result->fetch_array(MYSQLI_ASSOC);
@@ -25,17 +27,16 @@ if (!$result) {
 //echo "<ul>".$words."</ul>";
 
 
-$rows = $result->num_rows;
-$row = 0;
-$thisuser = "a";
-echo "<ul>";
-for ($j=0; $j<$rows; ++$j)
-    {
+    $rows = $result->num_rows;
+    $thisuser = "a";
+    echo "<ul>";
+    for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
-        $row = $result->fetch_row();
-        $thisuser = print_r($row,false);
-        echo "<li>".$thisuser."</li>";
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+
+        $thisuser = lookupUserName($row['userId']);
+        echo "<li>" . $thisuser . "</li>";
 
     }
-echo "</ul>";
-?>
+    echo "</ul>";
+}
