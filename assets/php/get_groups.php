@@ -23,14 +23,46 @@ try {
     if ($conn->connect_error)
         throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 
-    $query = "SELECT * from groups";
+    $query = 'SELECT * from groups WHERE gType="2"';
 
     $result = $conn->query($query);
     if (!$result)
         die($conn->error);
 
     $rows = $result->num_rows;
+    echo "<h2>Private:</h2>";
+    echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
+    for ($j = 0; $j < $rows; ++$j) {
+        $result->data_seek($j);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        if(uidInGroup($_SESSION['userId'], $row['groupId'])) {
+            echo '<tr>';
+            echo '<td>' . $row['groupName'] . '</td>';
+            echo '<td>' . $row['groupDesc'] . '</td>';
 
+            $query2 = "SELECT message FROM messages_" . $row["groupId"] . " LIMIT 1";
+            $result2 = $conn->query($query2);
+            if (!$result2)
+                throw new Exception("Error checking for existing username. " . ($conn->error));
+            $result2->data_seek(0);
+            $row2 = $result2->fetch_array(MYSQLI_ASSOC);
+
+            echo '<td>' . $row2['message'] . '</td>';
+
+            echo '<td>' . "<a href=\"groups.php?g=" . $row['groupId'] . "\">Select</a>" . '</td>';
+            echo '</tr>';
+        }
+    }
+    echo "</table>";
+
+    $query = 'SELECT * from groups WHERE gType="1"';
+
+    $result = $conn->query($query);
+    if (!$result)
+        die($conn->error);
+
+    $rows = $result->num_rows;
+    echo "<h2>Public:</h2>";
     echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
