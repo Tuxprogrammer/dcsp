@@ -81,57 +81,59 @@ if(isset($_POST['action']) && $_POST['action'] === "downvote") {
     die();
 }
 
-try {
-    unset($hostname, $username, $password, $db);
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    try {
+        unset($hostname, $username, $password, $db);
 
-    if ($conn->connect_error)
-        throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
+        if ($conn->connect_error)
+            throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
 
-    echo "<h1>Logged in to group " . $_SESSION["groupId"] . "</h1>";
+        echo "<h1>Logged in to group " . $_SESSION["groupId"] . "</h1>";
 
-    echo "<h1>Messages:</h1>";
+        echo "<h1>Messages:</h1>";
 
-    echo '<form action="messages.php" method="post">
+        echo '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="reset">
             <button type="submit" class="btn-link" name="">Back</button>
           </form>';
 
-    $groupId = $_SESSION["groupId"];
+        $groupId = $_SESSION["groupId"];
 
-    $query = "SELECT * from messages_$groupId";
+        $query = "SELECT * from messages_$groupId";
 
-    $result = $conn->query($query);
-    if (!$result)
-        die($conn->error);
+        $result = $conn->query($query);
+        if (!$result)
+            die($conn->error);
 
-    $rows = $result->num_rows;
+        $rows = $result->num_rows;
 
-    echo "<table><tr><th>User</th><th>Message</th><th>up/down</th></tr>";
-    for ($j = 0; $j < $rows; ++$j) {
-        $result->data_seek($j);
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        echo '<tr>';
-        echo '<td>' . $row['fromUser'] . '</td>';
-        echo '<td>' . $row['message'] . '</td>';
-        echo '<td>' .
-            '<form action="messages.php" method="post">
+        echo "<table><tr><th>User</th><th>Message</th><th>up/down</th></tr>";
+        for ($j = 0; $j < $rows; ++$j) {
+            $result->data_seek($j);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            echo '<tr>';
+            echo '<td>' . $row['fromUser'] . '</td>';
+            echo '<td>' . stripslashes($row['message']) . '</td>';
+            echo '<td>' .
+                '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="upvote">
-            <input type="hidden" name="id" value="'.$row['messageId'].'">
+            <input type="hidden" name="id" value="' . $row['messageId'] . '">
             <button type="submit" class="btn-link" name="">&#9650;</button>
           </form>' .
-            $row['upvotes'] .
-            '/' .
-            $row['downvotes'] .
-            '<form action="messages.php" method="post">
+                $row['upvotes'] .
+                '/' .
+                $row['downvotes'] .
+                '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="downvote">
-            <input type="hidden" name="id" value="'.$row['messageId'].'">
+            <input type="hidden" name="id" value="' . $row['messageId'] . '">
             <button type="submit" class="btn-link" name="">&#9660;</button>
           </form>' . '</td>';
-        echo '</tr>';
-    }
-    echo "</table>";
+            echo '</tr>';
+        }
+        echo "</table>";
 
-} catch (Exception $e) {
-    echo "<h1>$e</h1>";
+    } catch (Exception $e) {
+        echo "<h1>$e</h1>";
+    }
 }
 
