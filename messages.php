@@ -62,6 +62,7 @@
         <?php
         require_once 'assets/php/get_messages.php';
         require_once 'assets/php/send_message.php';
+        require_once 'assets/php/user_profile_list.php';
         require_once 'assets/php/add_user.php';
         ?>
     </div>
