@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
