@@ -6,6 +6,14 @@
  * Time: 5:20 PM
  */
 
+
+include 'common.php';
+
+if(isset($_SESSION['userName'])){
+            header("Location: assets/php/user_profile.php");
+            echo "You are already logged in!" . "<br>";
+          }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__.'/mysql_login.php';
 
@@ -26,6 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $userName = isset($_POST['username']) ? (string)$_POST['username'] : "";
         // $uTimeStamp         = ""; //This doesn't matter
+        if(isset($_POST['password'])){
+          $errors = checkBlank($_POST['password'],'password');
+          if ($errors['error']) {
+              echo $errors['errorText'];
+              die();
+          }
+        }
         $passwordHash = isset($_POST['password']) ? hash('sha512', $_POST['password'], true) : "";
         $realName = isset($_POST['realname']) ? (string)$_POST['realname'] : "";
         $emailAddress = isset($_POST['email']) ? (string)$_POST['email'] : "";
@@ -33,10 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $avatarImage = isset($_POST['avatarImage']) ? (string)$_POST['avatarImage'] : "";
 
         foreach (array('userName' => $userName,
-                     'password' => $passwordHash,
                      'realName' => $realName,
                      'emailAddress' => $emailAddress,
-                     'phoneNumber' => $phoneNumber,
+                     'phoneNumber' => $phoneNumber
                      ) as $type => $field) {
             $errors = validateField($field, $type);
             if ($errors['error']) {
@@ -50,9 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($userName === "" || $realName === "" || $emailAddress === "") {
             throw new Exception('Error: Invalid field.');
         }
-
-        //TODO: Add check for username not containing weird symbols, string escaping, also check email and phone number ...
-        // for correct format.
 
         $query = 'SELECT DISTINCT userName FROM users';
 

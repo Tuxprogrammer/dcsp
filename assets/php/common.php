@@ -101,19 +101,28 @@ function checkInvalidChars(&$field, $type)
     $errorText = "";
     $error = false;
     switch ($type) {
-        case "userName" || "realName":
+        case ("userName"):
             if (!preg_match("/^[a-zA-Z ]*$/", $field)) {
                 $errorText = "Only letters and/or white space are allowed";
+                echo $type . '<br>';
                 $error = true;
             }
             break;
-        case "emailAddress":
+        case ("realName"):
+            if (!preg_match("/^[a-zA-Z ]*$/", $field)) {
+                $errorText = "Only letters and/or white space are allowed";
+                echo $type . '<br>';
+                $error = true;
+            }
+            break;
+        case ("emailAddress"):
+        echo "YOU MADE IT!!" . "<br>";
             if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
                 $errorText = "Invalid email format";
                 $error = true;
             }
             break;
-        case "phoneNumber":
+        case ("phoneNumber"):
             $field = preg_replace('/[^0-9]+/', '', $field);
             if(strlen($field) > 12) {
                 $errorText = "Invalid phone number";
@@ -148,7 +157,9 @@ function validateField(&$field, $type = "")
 
         case "password":
             //passsword is blank
+            echo "YOU MADE IT!!!!";
             $errors = checkBlank($field, $type);
+            echo "hello";
             if ($errors['error']) return $errors;
 
             break;
