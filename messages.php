@@ -6,26 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/login-style.css">
-
-    <!-- TODO: GET RID OF THIS INLINE STYLE -->
-    <style>
-        td, th {
-            border: 1px solid black;
-            padding: 0;
-        }
-
-        a {
-            color: #ffffff;
-        }
-
-        a:hover {
-            color: #808080;
-        }
-
-        a:visited {
-            color: #404040;
-        }
-    </style>
 </head>
 <body>
 <header class="navbar navbar-toggleable-md navbar-light bg-faded">
