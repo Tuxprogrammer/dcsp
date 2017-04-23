@@ -6,8 +6,6 @@
  * Time: 4:53 PM
  */
 
-//TODO: This file should get all of the available groups to a user and print them in a ul list
-
 require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
@@ -18,8 +16,6 @@ if(isset($_GET['g']) && !empty($_GET['g']) && is_numeric($_GET['g'])) {
 }
 
 try {
-    unset($hostname, $username, $password, $db);
-
     if ($conn->connect_error) {
         throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
     }
