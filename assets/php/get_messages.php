@@ -6,8 +6,6 @@
  * Time: 6:24 PM
  */
 
-//TODO: File to convert message database into JSON or XML and echo it out.
-
 require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 
