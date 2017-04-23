@@ -12,17 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__.'/common.php';
 
     try {
-//        $conn = new mysqli($hostname, $username, $password, $db);
-//        unset($hostname, $username, $password, $db);
-//
-//        if ($conn->connect_error) {
-//            throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
-//        }
-
-
-        if (!isset($_SESSION['userId'])) {
-            throw new Exception('Not Logged In, please login in <a href="login.php">here</a>.');
-        }
 
         /*
          * groupId BIGINT UNSIGNED UNIQUE NOT NULL,
