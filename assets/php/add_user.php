@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     require_once __DIR__.'/check_login.php';
     require_once __DIR__.'/common.php';
 
-    // TODO: Add a user to a group by username
-
     if(!isset($_POST['userName'])) {
         echo '<h1>Invalid Username</h1>';
     }
