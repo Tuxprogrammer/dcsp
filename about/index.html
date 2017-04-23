@@ -3,59 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <title>About</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/about-style.css">
 </head>
 <body>
-  <header class="navbar">
-    <nav class="container">
-      <ul class="nav">
-        <li><h1 class="navbar-brand mb-0">cHat</h1></li>
-        <li><a class="nav-link active" href="..">Home</a></li>
-        <li><a class="nav-link" href="login/">Login</a></li>
-        <li><a class="nav-link" href="about/">About</a></li>
-        <li><a class="nav-link disabled" href="#">Contact</a></li>
-      </ul>
-    </nav>
+  <header>
+    <div class="container">
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="./index.html">cHat</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./../login.php">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./../register.php">Register</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </header>
+
   <div class="bg-pageheader">
     <div class="container">
       <h1>About cHat.</h1>
-      <hr noshade>
-      <h2>Brought to you by J.A.R.S-dev<br><br></h2>
+      <h3>Brought to you by J.A.R.S-dev</h3>
     </div>
   </div>
 
-  <div class="card-group">
-    <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Jack Fletcher</h4>
-        <p class="card-text"><b>Junior Computer Engineer</b><hr noshade><br/>Fluent in HTML and SASS development, Jack constructs elegant styles and formatting to turn cHat into a true masterpiece on the front end.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="card">
+          <h3 class="card-header">Jack Fletcher</h3>
+          <div class="card-block">
+            <h4 class="card-title">Junior Computer Engineer</h4>
+            <p class="card-text">Fluent in HTML and SASS development, Jack constructs elegant styles and formatting to
+              turn cHat into a true masterpiece on the front end.</p>
+            <p class="card-text">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Austin Markham</h4>
-        <p class="card-text"><b>Junior Software Engineer</b><hr noshade><br/>Focusing on PHP frontend and Javascript development, Austin links pages with content ensuring the user experience is fluid throughout the site.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="card">
+          <h3 class="card-header">Austin Markham</h3>
+          <div class="card-block">
+            <h4 class="card-title">Junior Software Engineer</h4>
+            <p class="card-text">Focusing on PHP frontend and Javascript development, Austin links pages with content
+              ensuring the user experience is fluid throughout the site.</p>
+            <p class="card-text">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Rob Harris</h4>
-        <p class="card-text"><b>Senior Computer Science</b><hr noshade><br/>Familiar with MySQL and databases, Rob manages and connects the database structure to ensure that cHat can serve users quickly.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="card">
+          <h3 class="card-header">Rob Harris</h3>
+          <div class="card-block">
+            <h4 class="card-title">Senior Computer Science</h4>
+            <p class="card-text">Familiar with MySQL and databases, Rob manages and connects the database structure to
+              ensure that cHat can serve users quickly.</p>
+            <p class="card-text">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Spencer Callicott</h4>
-        <p class="card-text"><b>Junior Computer Engineer</b><hr noshade><br/>Specializing in PHP backend development and API implementation, Spencer develops and troubleshoots the many parts of the cHat website behind the scenes.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="col-xs-12 col-md-6 col-lg-3">
+        <div class="card">
+          <h3 class="card-header">Spencer Callicott</h3>
+          <div class="card-block">
+            <h4 class="card-title">Junior Computer Engineer</h4>
+            <p class="card-text">Specializing in PHP backend development and API implementation, Spencer develops and
+              troubleshoots the many parts of the cHat website behind the scenes.</p>
+            <p class="card-text">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+          integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+          integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+          integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+          crossorigin="anonymous"></script>
 </body>
 </html>

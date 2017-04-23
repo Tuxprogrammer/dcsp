@@ -3,24 +3,37 @@
 /* #################################### */
 /* BASE */
 /* variables */
-header {
-  background-color: #0a8 !important; }
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@font-face {
+  font-family: "Roboto", sans-serif; }
+body {
+  font-family: "Roboto", sans-serif; }
+
+html {
+  font-size: 12pt; }
+  @media (min-width: 700px) {
+    html {
+      font-size: 16pt; } }
 
 body {
   background-color: #b8d6d0; }
 
+header, nav {
+  background-color: #0a8 !important; }
+
+.navbar {
+  padding: 0.5rem 0; }
+
 .bg-pageheader {
-  background: navy;
+  background: midnightblue;
   padding: 2rem 1rem; }
-
-h1 {
-  color: #dddddd; }
-
-h2 {
-  color: #e4e4e4; }
-
-h3 {
-  color: #b1b1b1; }
+  .bg-pageheader h1 {
+    color: #dddddd;
+    font-weight: 300; }
+  .bg-pageheader h2 {
+    color: #e4e4e4; }
+  .bg-pageheader h3 {
+    color: #b1b1b1; }
 
 .row > [class*='col-'] {
   padding-top: 2rem;
