@@ -13,6 +13,7 @@
     <option value="2">2 - Private</option>
 </select><br>
     Group Name: <input name="groupName" type="text" required><br>
+    Description: <input name="groupDesc" type="text"><br>
 
     Avatar Image: <input name="avatarImage" type="url"><br>
 

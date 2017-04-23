@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          * creator BIGINT UNSIGNED,
          */
 
-        $groupName = isset($_POST['groupName']) ? (string)$_POST['groupName'] : '';
-
+        $groupName = isset($_POST['groupName']) ? $_POST['groupName'] : '';
+        $groupDesc = isset($_POST['groupDesc']) ? $_POST['groupDesc'] : '';
         $gType = isset($_POST['gType']) ? $_POST['gType'] : '';
         $creator = $_SESSION['userId'];
 
         // Insert New Group into groups table
         $query = "INSERT INTO groups (groupName, groupDesc, gTimeStamp, gType, creator)
-              VALUES (\"$groupName\", \"\", NOW(), \"$gType\", \"$creator\")";
+              VALUES (\"$groupName\", \"$groupDesc\", NOW(), \"$gType\", \"$creator\")";
 
         echo $query;
         $result = $conn->query($query);
