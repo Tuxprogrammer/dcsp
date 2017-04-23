@@ -163,7 +163,7 @@ function validateField(&$field, $type = "")
 
 function uidInGroup($userId, $groupId) {
     global $conn;
-    $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId='.$groupId.' LIMIT 1';
+    $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId="'.$groupId.'" LIMIT 1';
 
     $result = $conn->query($query);
     if (!$result) {
@@ -174,4 +174,19 @@ function uidInGroup($userId, $groupId) {
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
     return isset($row['userId']) ? $row['userId'] : "";
+}
+
+function groupPrivate($groupId) {
+    global $conn;
+    $query = 'SELECT gType FROM groups WHERE groupId="'.$groupId.'" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for group type. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return ($row['gType'] == "1") ? false : true;
 }
