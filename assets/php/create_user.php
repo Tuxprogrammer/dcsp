@@ -59,11 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // DATA VALIDATION
-        // check for blank parameters
-        if ($userName === '' || $realName === '' || $emailAddress === '') {
-            throw new Exception('Error: Invalid field.');
-        }
+        validateField($userName, 'userName');
+        validateField($realName, 'realName');
+        validateField($emailAddress, 'emailAddress');
+        validateField($phoneNumber, 'phoneNumber');
 
         $query = 'SELECT DISTINCT userName FROM users';
 
@@ -83,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception('Error, username matches a user already on file.');
             }
         }
+
 
 
         // ADDING NEW USER
