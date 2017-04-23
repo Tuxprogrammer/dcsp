@@ -6,6 +6,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/login-style.css">
+
+    <!-- TODO: GET RID OF THIS INLINE STYLE -->
+    <style>
+        td,th {
+            border: 1px solid black;
+            padding: 1em 1em 1em 1em;
+        }
+        a {
+            color: #ffffff;
+        }
+        a:hover {
+            color: #808080;
+        }
+        a:visited {
+            color: #404040;
+        }
+    </style>
 </head>
 <body>
 <header class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -37,16 +54,9 @@
         </div>
     </nav>
 </header>
-<div class="">
+<div class="bg-pageheader">
     <div class="container">
-        <?php
-        require_once 'assets/php/get_messages.php';
-        require_once 'assets/php/send_message.php';
-        require_once 'assets/php/user_profile_list.php';
-        require_once 'assets/php/add_user.php';
-        require_once 'assets/php/remove_user.php';
-        require_once 'assets/php/user_profile_list.php';
-        ?>
+    <?php require_once 'assets/php/admin_profile.php'; ?>
     </div>
 </div>
 </body>

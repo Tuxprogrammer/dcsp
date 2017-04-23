@@ -159,9 +159,7 @@ function validateField($field, $type = '')
 
         case 'password':
             //passsword is blank
-            echo 'YOU MADE IT!!!!';
             $errors = checkBlank($field, $type);
-            echo 'hello';
             if ($errors['error']) {return $errors;}
 
             break;
@@ -193,4 +191,19 @@ function uidInGroup($userId, $groupId) {
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
     return isset($row['userId']) ? $row['userId'] : '';
+}
+
+function groupPrivate($groupId) {
+    global $conn;
+    $query = 'SELECT gType FROM groups WHERE groupId="'.$groupId.'" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for group type. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return ($row['gType'] == "1") ? false : true;
 }
