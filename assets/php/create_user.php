@@ -94,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 avatarImage, banned, admin)
               VALUES (NOW(), \"$userName\", \"$realName\", \"$emailAddress\", \"$phoneNumber\", \"$passwordHex\", \"$avatarImage\",
               0, 0)";
-        echo $query;
 
         /*
         $query = "INSERT INTO users (uTimeStamp, userName, realName, emailAddress, phoneNumber, passwordHash,
