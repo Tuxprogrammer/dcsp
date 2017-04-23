@@ -176,6 +176,12 @@ function validateField($field, $type = '')
 
 function uidInGroup($userId, $groupId) {
     global $conn;
+    $query = 'SELECT gType FROM groups WHERE groupId="'.$groupId.'" LIMIT 1';
+    $result = $conn->query($query);
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    if(isset($row['gType']) && $row['gType'] === '1') {return 1;}
+
     $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId='.$groupId.' LIMIT 1';
 
     $result = $conn->query($query);
