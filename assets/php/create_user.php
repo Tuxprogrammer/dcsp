@@ -7,11 +7,11 @@
  */
 
 
-include 'common.php';
+include __DIR__.'/common.php';
 
 if(isset($_SESSION['userName'])){
-            header("Location: assets/php/user_profile.php");
-            echo "You are already logged in!" . "<br>";
+            header('Location: assets/php/user_profile.php');
+            echo 'You are already logged in!' . '<br>';
           }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          * admin TINYINT(1),
         */
 
-        $userName = isset($_POST['username']) ? (string)$_POST['username'] : "";
+        $userName = isset($_POST['username']) ? (string)$_POST['username'] : '';
         // $uTimeStamp         = ""; //This doesn't matter
         if(isset($_POST['password'])){
           $errors = checkBlank($_POST['password'],'password');
@@ -41,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               die();
           }
         }
-        $passwordHash = isset($_POST['password']) ? hash('sha512', $_POST['password'], true) : "";
-        $realName = isset($_POST['realname']) ? (string)$_POST['realname'] : "";
-        $emailAddress = isset($_POST['email']) ? (string)$_POST['email'] : "";
-        $phoneNumber = isset($_POST['phone-number']) ? (string)$_POST['phone-number'] : "";
-        $avatarImage = isset($_POST['avatarImage']) ? (string)$_POST['avatarImage'] : "";
+        $passwordHash = isset($_POST['password']) ? hash('sha512', $_POST['password'], true) : '';
+        $realName = isset($_POST['realname']) ? (string)$_POST['realname'] : '';
+        $emailAddress = isset($_POST['email']) ? (string)$_POST['email'] : '';
+        $phoneNumber = isset($_POST['phone-number']) ? (string)$_POST['phone-number'] : '';
+        $avatarImage = isset($_POST['avatarImage']) ? (string)$_POST['avatarImage'] : '';
 
         foreach (array('userName' => $userName,
                      'realName' => $realName,
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // DATA VALIDATION
         // check for blank parameters
-        if ($userName === "" || $realName === "" || $emailAddress === "") {
+        if ($userName === '' || $realName === '' || $emailAddress === '') {
             throw new Exception('Error: Invalid field.');
         }
 
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //echo '<h1>User added successfully. Thanks!';
 
         // TODO: Implement user profile page, and redirect user to there, as well as log them in
-        header("Location: login.php");
+        header('Location: login.php');
     } catch (Exception $e) {
         echo "<h1>$e</h1>";
     }

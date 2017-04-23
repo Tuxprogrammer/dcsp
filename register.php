@@ -52,7 +52,7 @@
         <div class="form-group row">
           <label for="username-input" class="col-xs-4 col-lg-2 col-form-label">Username</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="text" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""; ?>" >
+            <input class="form-control" type="text" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>" >
           </div>
         </div>
         <div class="form-group row">
@@ -64,19 +64,19 @@
         <div class="form-group row">
           <label for="realname-input" class="col-xs-4 col-lg-2 col-form-label">Real Name</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="text" name="realname" value="<?php echo isset($_POST['realname']) ? $_POST['realname'] : ""; ?>">
+            <input class="form-control" type="text" name="realname" value="<?php echo isset($_POST['realname']) ? $_POST['realname'] : ''; ?>">
           </div>
         </div>
         <div class="form-group row">
           <label for="email-input" class="col-xs-4 col-lg-2 col-form-label">Email Address</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""; ?>">
+            <input class="form-control" type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
           </div>
         </div>
         <div class="form-group row">
           <label for="phone-number-input" class="col-xs-4 col-lg-2 col-form-label">Phone Number</label>
           <div class="col-xs-8 col-lg-10">
-            <input class="form-control" type="tel" name="phone-number" value="<?php echo isset($_POST['phone-number']) ? $_POST['phone-number'] : ""; ?>">
+            <input class="form-control" type="tel" name="phone-number" value="<?php echo isset($_POST['phone-number']) ? $_POST['phone-number'] : ''; ?>">
           </div>
         </div>
         <div class="form-group row justify-content-center">

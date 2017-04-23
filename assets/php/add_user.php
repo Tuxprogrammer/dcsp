@@ -6,27 +6,27 @@
  * Time: 3:57 PM
  */
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === "add") {
-    require_once 'mysql_login.php';
-    require_once 'check_login.php';
-    require_once 'common.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add') {
+    require_once __DIR__.'/mysql_login.php';
+    require_once __DIR__.'/check_login.php';
+    require_once __DIR__.'/common.php';
 
     // TODO: Add a user to a group by username
 
     if(!isset($_POST['userName'])) {
-        echo "<h1>Invalid Username</h1>";
+        echo '<h1>Invalid Username</h1>';
     }
 
     if(!isset($_SESSION['groupId'])) {
         echo '<h1>Please select a <a href="groups.php">Group</a>.';
-    };
+    }
 
     // Get userId
 
     $userId = lookupUserId($_POST['userName']);
 
     if (empty($userId)) {
-        echo "<h1>Username not found.</h1>";
+        echo '<h1>Username not found.</h1>';
         die();
     }
 
@@ -68,11 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         throw new Exception('Error adding new group to database. ' . $conn->error);
     }
 
-    header("Location: messages.php");
+    header('Location: messages.php');
 }
-echo "<form action=\"messages.php\" method=\"post\">
+echo '<form action="messages.php" method="post">
             Add a user to this group. <br />
-            Username: <input type=\"text\" name=\"userName\" id=\"userName\">
-            <input type=\"hidden\" name=\"action\" value=\"add\">
-            <button type=\"submit\" class=\"btn-link\" name=\"\">Add</button>
-          </form>";
+            Username: <input type="text" name="userName" id="userName">
+            <input type="hidden" name="action" value="add">
+            <button type="submit" class="btn-link" name="">Add</button>
+          </form>';

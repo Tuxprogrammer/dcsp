@@ -15,16 +15,16 @@ require_once __DIR__.'/mysql_login.php';
 require_once __DIR__.'/check_login.php';
 require_once __DIR__.'/common.php';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === "send") {
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'send') {
 
-    if(!(isset($_POST['userId']) && isset($_POST['groupId']) && isset($_POST['message']))) {die(); }
+    if(!isset($_POST['userId'], $_POST['groupId'], $_POST['message'])) {die(); }
 
 
     $fromUserId = $_POST['userId'];
     $groupId = $_POST['groupId'];
     $message = $_POST['message'];
 
-    if ($_FILES && $_FILES['upfile']['error'] != UPLOAD_ERR_NO_FILE)
+    if ($_FILES && $_FILES['upfile']['error'] !== UPLOAD_ERR_NO_FILE)
     {
         // Adopted from http://php.net/manual/en/features.file-upload.php
         // Check $_FILES['upfile']['error'] value.
@@ -89,8 +89,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['a
 }
 echo "<form action=\"messages.php\" method=\"post\" enctype='multipart/form-data'>
             <input type=\"hidden\" name=\"action\" value=\"send\">
-            <input type=\"hidden\" name=\"userId\" value=\"".$_SESSION['userId']."\">
-            <input type=\"hidden\" name=\"groupId\" value=\"".$_SESSION['groupId']."\">
+            <input type=\"hidden\" name=\"userId\" value=\"".$_SESSION['userId']. '">
+            <input type="hidden" name="groupId" value="' .$_SESSION['groupId']."\">
             <input type=\"text\" name=\"message\">
             Select Image: <input type='file' name='upfile' size='10'>
             <button type=\"submit\" class=\"btn-link\" name=\"\">Send</button>

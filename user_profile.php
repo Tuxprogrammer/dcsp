@@ -8,6 +8,7 @@
  * Date: 4/11/2017
  * Time: 6:35 PM
  */
+  require_once __DIR__.'/assets/php/edit_user_profile.php';
   require_once __DIR__.'/assets/php/user_profile.php';
 ?>
 </body>

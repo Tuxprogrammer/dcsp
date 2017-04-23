@@ -60,11 +60,11 @@
 <div class="">
     <div class="container">
         <?php
-        require_once 'assets/php/get_messages.php';
-        require_once 'assets/php/send_message.php';
-        require_once 'assets/php/user_profile_list.php';
-        require_once 'assets/php/add_user.php';
-        require_once 'assets/php/user_profile_list.php';
+        require_once __DIR__.'/assets/php/get_messages.php';
+        require_once __DIR__.'/assets/php/send_message.php';
+        require_once __DIR__.'/assets/php/user_profile_list.php';
+        require_once __DIR__.'/assets/php/add_user.php';
+        require_once __DIR__.'/assets/php/user_profile_list.php';
         ?>
     </div>
 </div>

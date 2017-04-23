@@ -10,7 +10,7 @@ require_once __DIR__ . '/mysql_login.php';
 function lookupUserName($userId)
 {
     global $conn;
-    $query = "SELECT userId, userName FROM users WHERE userId=" . $userId . " LIMIT 1";
+    $query = 'SELECT userId, userName FROM users WHERE userId=' . $userId . ' LIMIT 1';
 
     $result = $conn->query($query);
     if (!$result) {
@@ -20,13 +20,13 @@ function lookupUserName($userId)
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    return isset($row['userName']) ? $row['userName'] : "";
+    return isset($row['userName']) ? $row['userName'] : '';
 }
 
 function lookupUserId($userName)
 {
     global $conn;
-    $query = "SELECT userId, userName FROM users WHERE userName=\"" . $userName . "\" LIMIT 1";
+    $query = 'SELECT userId, userName FROM users WHERE userName="' . $userName . '" LIMIT 1';
 
     $result = $conn->query($query);
     if (!$result) {
@@ -36,7 +36,7 @@ function lookupUserId($userName)
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    return isset($row['userId']) ? $row['userId'] : "";
+    return isset($row['userId']) ? $row['userId'] : '';
 }
 
 function mysql_entities_fix_string($connection, $string)
@@ -47,7 +47,7 @@ function mysql_entities_fix_string($connection, $string)
 function mysql_fix_string($string)
 {
     global $conn;
-    if (get_magic_quotes_gpc()) $string = stripslashes($string);
+    if (get_magic_quotes_gpc()) {$string = stripslashes($string);}
     return $conn->real_escape_string($string);
 }
 
@@ -57,8 +57,9 @@ function send_message($userId, $groupId, $message)
     require_once __DIR__ . '/check_login.php';
     global $conn;
 
-    if ($conn->connect_error)
-        throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
+    if ($conn->connect_error) {
+        throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+    }
 
     /*
      * messageId BIGINT UNSIGNED UNIQUE NOT NULL,
@@ -73,59 +74,60 @@ function send_message($userId, $groupId, $message)
     $message = addslashes($message);
 
     // Insert New Group into groups table
-    $query = "INSERT INTO messages_" . $groupId . " (fromUser, mTimeStamp, upvotes, downvotes, message)
+    $query = 'INSERT INTO messages_' . $groupId . " (fromUser, mTimeStamp, upvotes, downvotes, message)
               VALUES (\"$userId\", NOW(), \"0\", \"0\", \"$message\")";
 
     echo $query;
     $result = $conn->query($query);
-    if (!$result)
-        throw new Exception("Error adding new message to database. " . ($conn->error));
+    if (!$result) {
+        throw new Exception('Error adding new message to database. ' . $conn->error);
+    }
 
 }
 
 function checkBlank($field, $type)
 {
-    $errorText = "";
+    $errorText = '';
     $error = false;
 
     //name is blank
     if (empty($field)) {
-        $errorText = $type . " cannot be blank.";
+        $errorText = $type . ' cannot be blank.';
         $error = true;
     }
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function checkInvalidChars(&$field, $type)
+function checkInvalidChars($field, $type)
 {
-    $errorText = "";
+    $errorText = '';
     $error = false;
     switch ($type) {
-        case ("userName"):
-            if (!preg_match("/^[a-zA-Z ]*$/", $field)) {
-                $errorText = "Only letters and/or white space are allowed";
+        case ('userName'):
+            if (!preg_match('/^[0-9a-zA-Z]*$/', $field)) {
+                $errorText = 'Only letters and/or numbers are allowed';
                 echo $type . '<br>';
                 $error = true;
             }
             break;
-        case ("realName"):
-            if (!preg_match("/^[a-zA-Z ]*$/", $field)) {
-                $errorText = "Only letters and/or white space are allowed";
+        case ('realName'):
+            if (!preg_match('/^[a-zA-Z ]*$/', $field)) {
+                $errorText = 'Only letters and/or white space are allowed';
                 echo $type . '<br>';
                 $error = true;
             }
             break;
-        case ("emailAddress"):
-        echo "YOU MADE IT!!" . "<br>";
+        case ('emailAddress'):
+        echo 'YOU MADE IT!!' . '<br>';
             if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
-                $errorText = "Invalid email format";
+                $errorText = 'Invalid email format';
                 $error = true;
             }
             break;
-        case ("phoneNumber"):
-            $field = preg_replace('/[^0-9]+/', '', $field);
+        case ('phoneNumber'):
+            $field = preg_replace('/\D+/', '', $field);
             if(strlen($field) > 12) {
-                $errorText = "Invalid phone number";
+                $errorText = 'Invalid phone number';
                 $error = true;
             }
 
@@ -136,31 +138,31 @@ function checkInvalidChars(&$field, $type)
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function validateField(&$field, $type = "")
+function validateField($field, $type = '')
 {
     global $conn;
     $field = $conn->real_escape_string($field);
-    $errorText = "";
+    $errorText = '';
     $error = false;
 
     switch ($type) {
-        case "userName" || "realName" || "emailAddress" || "phoneNumber":
+        case 'userName' || 'realName' || 'emailAddress' || 'phoneNumber':
             //name is blank
             $errors = checkBlank($field, $type);
-            if ($errors['error']) return $errors;
+            if ($errors['error']) {return $errors;}
 
             //Name contains invalid characters
             $errors = checkInvalidChars($field, $type);
-            if ($errors['error']) return $errors;
+            if ($errors['error']) {return $errors;}
 
             break;
 
-        case "password":
+        case 'password':
             //passsword is blank
-            echo "YOU MADE IT!!!!";
+            echo 'YOU MADE IT!!!!';
             $errors = checkBlank($field, $type);
-            echo "hello";
-            if ($errors['error']) return $errors;
+            echo 'hello';
+            if ($errors['error']) {return $errors;}
 
             break;
 
@@ -184,5 +186,5 @@ function uidInGroup($userId, $groupId) {
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    return isset($row['userId']) ? $row['userId'] : "";
+    return isset($row['userId']) ? $row['userId'] : '';
 }

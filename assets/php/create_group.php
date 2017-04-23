@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          * creator BIGINT UNSIGNED,
          */
 
-        $groupName = isset($_POST['groupName']) ? (string)$_POST['groupName'] : "";
+        $groupName = isset($_POST['groupName']) ? (string)$_POST['groupName'] : '';
 
-        $gType = isset($_POST['gType']) ? $_POST['gType'] : "";
+        $gType = isset($_POST['gType']) ? $_POST['gType'] : '';
         $creator = $_SESSION['userId'];
 
         // Insert New Group into groups table
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Done
         echo '<h1>Group added successfully. Thanks!';
-        header("refresh:3; url=groups.php");
+        header('refresh:3; url=groups.php');
         die();
 
     } catch (Exception $e) {

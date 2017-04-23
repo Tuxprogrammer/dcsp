@@ -10,7 +10,7 @@
 
 session_start();
 
-require_once 'mysql_login.php';
+require_once __DIR__.'/mysql_login.php';
 
 //echo $_SESSION['userName'] . "<br>" .
 //$_SESSION['realName'] . "<br>" .
@@ -22,8 +22,8 @@ require_once 'mysql_login.php';
 //$_SESSION['emailAddress'] . "<br>".
 //$_SESSION['groupId'] . "<br>";
 
-if(!(isset($_SESSION['userId']) && (isset($_SESSION['userName'])))) {
-    echo "Not Logged In, please login in <a href=\"login.php\">here</a>.";
+if(!isset($_SESSION['userId'], $_SESSION['userName'])) {
+    echo 'Not Logged In, please login in <a href="login.php">here</a>.';
     die();
 }
 

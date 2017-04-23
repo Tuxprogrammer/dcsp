@@ -6,17 +6,17 @@ require_once __DIR__ . '/common.php';
 
 //Checks to see if session is already initiated (user is already logged in)
 if (isset($_SESSION['userName'])) {
-    header("Location: groups.php");
+    header('Location: groups.php');
 } else {
 
     unset($hostname, $username, $password, $db);
 
-    if ($conn->connect_error)
-        throw new Exception("The server is currently experiencing difficulties connecting to the database. " . $conn->connect_error);
+    if ($conn->connect_error) {
+        throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+    }
 //Checks if username and password have been set
-    if ($_SERVER['REQUEST_METHOD'] == "POST" &&
-        isset($_POST['username']) &&
-        isset($_POST['password'])
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
+        isset($_POST['username'], $_POST['password'])
     ) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -34,7 +34,7 @@ if (isset($_SESSION['userName'])) {
 
         $query = "SELECT * FROM users WHERE userName='$un_temp'";
         $result = $conn->query($query);
-        if (!$result) die($conn->error);
+        if (!$result) {die($conn->error);}
         elseif ($result->num_rows) {
             $result = $conn->query($query);
             if (!$result) {
@@ -46,22 +46,22 @@ if (isset($_SESSION['userName'])) {
 
             $token = hash('sha512', "$pw_temp");
 
-            if ($token == $row["passwordHash"]) {
+            if ($token === $row['passwordHash']) {
 
                 $_SESSION['userName'] = $un_temp;
-                $_SESSION['realName'] = $row["realName"];
-                $_SESSION['userId'] = $row["userId"];
-                $_SESSION['admin'] = $row["admin"];
-                $_SESSION['banned'] = $row["banned"];
-                $_SESSION['avatarImage'] = $row["avatarImage"];
-                $_SESSION['phoneNumber'] = $row["phoneNumber"];
-                $_SESSION['emailAddress'] = $row["emailAddress"];
+                $_SESSION['realName'] = $row['realName'];
+                $_SESSION['userId'] = $row['userId'];
+                $_SESSION['admin'] = $row['admin'];
+                $_SESSION['banned'] = $row['banned'];
+                $_SESSION['avatarImage'] = $row['avatarImage'];
+                $_SESSION['phoneNumber'] = $row['phoneNumber'];
+                $_SESSION['emailAddress'] = $row['emailAddress'];
 
                 //echo "Hi ".$row['realName'].", you are now logged in as ".$row['username'];
 
-                header("Location: groups.php");
+                header('Location: groups.php');
             } else {
-                echo "<p>Invalid username/password combination</p>";
+                echo '<p>Invalid username/password combination</p>';
             }
         }
     }
