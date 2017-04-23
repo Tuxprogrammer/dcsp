@@ -33,7 +33,7 @@ try {
 
     $rows = $result->num_rows;
     echo "<section id='private'>\n<h2>Private:</h2>";
-    echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
+    echo '<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>';
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
         $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -67,7 +67,7 @@ try {
 
     $rows = $result->num_rows;
     echo "<section id='public'>\n<h2>Public:</h2>";
-    echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
+    echo '<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>';
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
         $row = $result->fetch_array(MYSQLI_ASSOC);
