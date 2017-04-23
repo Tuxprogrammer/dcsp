@@ -30,7 +30,7 @@ try {
         die($conn->error);
 
     $rows = $result->num_rows;
-    echo "<h2>Private:</h2>";
+    echo "<section id='private'>\n<h2>Private:</h2>";
     echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
@@ -53,7 +53,7 @@ try {
             echo '</tr>';
         }
     }
-    echo "</table>";
+    echo "</table>\n</section>";
 
     $query = 'SELECT * from groups WHERE gType="1"';
 
@@ -62,7 +62,7 @@ try {
         die($conn->error);
 
     $rows = $result->num_rows;
-    echo "<h2>Public:</h2>";
+    echo "<section id='public'>\n<h2>Public:</h2>";
     echo "<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>";
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
@@ -83,7 +83,7 @@ try {
         echo '<td>' . "<a href=\"groups.php?g=".$row['groupId']."\">Select</a>" . '</td>';
         echo '</tr>';
     }
-    echo "</table>";
+    echo "</table>\n</section>";
 
 } catch (Exception $e) {
     echo "<h1>$e</h1>";

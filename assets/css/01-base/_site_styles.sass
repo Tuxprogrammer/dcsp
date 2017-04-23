@@ -1,0 +1,27 @@
+html
+  font-size: 12pt
+  @media (min-width: 700px)
+    font-size: 16pt
+
+body
+  background-color: shade(tint($brand-background, 80%), 10%)
+
+header, nav
+  background-color: #0a8 !important
+
+.navbar
+  padding: 0.5rem 0
+
+.bg-pageheader
+  background: midnightblue
+  padding: 2rem 1rem
+
+  h1
+    color: $brand-font-color
+    font-weight: 300
+
+  h2
+    color: tint($brand-font-color, 20%)
+
+  h3
+    color: shade($brand-font-color, 20%)
