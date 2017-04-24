@@ -56,7 +56,7 @@
 </header>
 <div class="bg-pageheader">
     <div class="container">
-    <?php require_once 'assets/php/admin_profile.php'; ?>
+    <?php require_once __DIR__.'/assets/php/admin_profile.php'; ?>
     </div>
 </div>
 </body>

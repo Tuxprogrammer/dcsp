@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
     if (!isset($_POST['value'])) {
         $inputType = '';
 
-        if ($_POST['param'] === "avatarImage") {
+        if ($_POST['param'] === 'avatarImage') {
             echo '<h1>Edit ' . $_POST['param'] . '</h1><form method="POST" action="user_profile.php" enctype=\'multipart/form-data\'><input type="file" name="upfile" size="10"><input type="hidden" name="param" value="' . $_POST['param'] . '"><input type="hidden" name="value" value="1"><button type="submit">Submit</button></form>';
 
             die;
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
 
         echo '<h1>Edit ' . $_POST['param'] . '</h1><form method="POST" action="user_profile.php"><input type="' . $inputType . '" name="value"><input type="hidden" name="param" value="' . $_POST['param'] . '"><button type="submit">Submit</button></form>';
     } else {
-        if ($_POST['param'] === "avatarImage") {
+        if ($_POST['param'] === 'avatarImage') {
             if ($_FILES && $_FILES['upfile']['error'] !== UPLOAD_ERR_NO_FILE) {
                 // Adopted from http://php.net/manual/en/features.file-upload.php
                 // Check $_FILES['upfile']['error'] value.

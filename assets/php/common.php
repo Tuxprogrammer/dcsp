@@ -55,7 +55,7 @@ function lookupGroupName($groupId)
     return isset($row['groupName']) ? $row['groupName'] : '';
 }
 
-function mysql_entities_fix_string($connection, $string)
+function mysql_entities_fix_string($string)
 {
     return htmlentities(mysql_fix_string($string));
 }
@@ -221,5 +221,5 @@ function groupPrivate($groupId) {
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    return ($row['gType'] == "1") ? false : true;
+    return $row['gType'] !== '1';
 }
