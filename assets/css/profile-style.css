@@ -34,27 +34,19 @@ header, nav {
     color: #b1b1b1;
     font-weight: 300; }
 
-a {
-  text-decoration: none; }
-  a:hover {
-    text-decoration: none; }
-  a .group {
-    background-color: #7db2ff;
-    border-radius: 0.2rem;
-    margin: 0.5rem 0; }
-    a .group:hover {
-      background-color: #688BC3;
-      color: #292d29; }
-
-section {
-  margin: 2rem 0; }
-  section a {
-    color: #333; }
-  section a:hover {
-    color: #808080; }
+#dashboard {
+  margin: 1rem 0; }
+  #dashboard .btn-primary {
+    background-color: midnightblue;
+    border-color: midnightblue;
+    color: #dddddd;
+    font: inherit; }
+    #dashboard .btn-primary:hover {
+      background-color: #151554;
+      border-color: #151554; }
 
 .btn-danger {
   color: #dddddd;
   font: inherit; }
 
-/*# sourceMappingURL=groups-style.css.map */
+/*# sourceMappingURL=profile-style.css.map */

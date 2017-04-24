@@ -28,9 +28,11 @@ header, nav {
     color: #dddddd;
     font-weight: 300; }
   .bg-pageheader h2 {
-    color: #e4e4e4; }
+    color: #e4e4e4;
+    font-weight: 300; }
   .bg-pageheader h3 {
-    color: #b1b1b1; }
+    color: #b1b1b1;
+    font-weight: 300; }
 
 .card {
   background-color: #98c4ba;
