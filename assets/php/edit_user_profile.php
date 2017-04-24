@@ -64,15 +64,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
 
         // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
         // Check MIME Type by yourself.
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        if (false === $ext = array_search($finfo->file($_FILES['upfile']['tmp_name']), [
-                'jpg' => 'image/jpeg',
-                'png' => 'image/png',
-                'gif' => 'image/gif',
-            ], true)
-        ) {
-          throw new RuntimeException('Invalid file format.');
-        }
+          //            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+//            $finfo = mime_content_type($_FILES['upfile']['tmp_name']);
+          $check = getimagesize($_FILES['upfile']['tmp_name']);
+          $finfo = '';
+          if($check !== false) {
+              $finfo = $check['mime'];
+          }
+
+          if (false === $ext = array_search(
+                  $finfo,
+                  array(
+                      'jpg' => 'image/jpeg',
+                      'png' => 'image/png',
+                      'gif' => 'image/gif',
+                  ),
+                  true
+              )
+          ) {
+              throw new RuntimeException('Invalid file format.');
+          }
 
         $name = sha1_file($_FILES['upfile']['tmp_name']);
 
