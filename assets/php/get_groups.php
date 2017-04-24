@@ -81,7 +81,7 @@ try {
     $result2->data_seek(0);
     $row2 = $result2->fetch_array(MYSQLI_ASSOC);
 
-    echo '<div class="col-5"><span>' . $row2['message'] . '</span></div></div></a>';
+    echo '<div class="col-5"><span>' . substr($row2['message'], 0, 128) . ((strlen($row2['message']) > 128) ? '...' : '') . '</span></div></div></a>';
   }
   echo "\n</section>";
 
