@@ -73,7 +73,7 @@ foreach ($groupIds as $groupId) {
     <div class="col-md-9">
       <div id="userinfo">
 
-        <img src="<?php echo $avatarImage; ?>" alt="Image not found">
+<img src="<?php if(!$avatarImage){echo "media/default_avatar.png";} else{echo $avatarImage;} ?>" alt="default_avatar.png">
           <form action="user_profile.php" method="post"><input type="hidden" name="param" value="avatarImage"><button type="submit">Edit Avatar</button></form>
         <table>
           <tr>
