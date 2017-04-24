@@ -97,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $groupId = $_SESSION['groupId'];
 
-        $query = "SELECT * from messages_$groupId";
+        $query = "SELECT * from messages_$groupId ORDER BY messageId DESC";
 
         $result = $conn->query($query);
         if (!$result) {
@@ -111,7 +111,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             $result->data_seek($j);
             $row = $result->fetch_array(MYSQLI_ASSOC);
             echo '<tr>';
-            echo '<td>' . $row['fromUser'] . '</td>';
+            echo '<td>' . lookupUserName($row['fromUser']) . '</td>';
             echo '<td>' . stripslashes($row['message']) . '</td>';
             echo '<td>' .
                 '<form action="messages.php" method="post">

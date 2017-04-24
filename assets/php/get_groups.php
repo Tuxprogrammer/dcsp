@@ -27,32 +27,38 @@ try {
         die($conn->error);
     }
 
-    $rows = $result->num_rows;
+
     echo "<section id='private'>\n<h2>Private:</h2>";
-    echo '<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>';
-    for ($j = 0; $j < $rows; ++$j) {
-        $result->data_seek($j);
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        if(uidInGroup($_SESSION['userId'], $row['groupId'])) {
-            echo '<tr>';
-            echo '<td>' . $row['groupName'] . '</td>';
-            echo '<td>' . $row['groupDesc'] . '</td>';
+    $rows = $result->num_rows;
+    if($rows > 0) {
+        echo '<table><tr><th>Group Name</th><th>Group Description</th><th>Latest Message</th><th>Login</th></tr>';
+        for ($j = 0; $j < $rows; ++$j) {
+            $result->data_seek($j);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            if (uidInGroup($_SESSION['userId'], $row['groupId'])) {
+                echo '<tr>';
+                echo '<td>' . $row['groupName'] . '</td>';
+                echo '<td>' . $row['groupDesc'] . '</td>';
 
-            $query2 = 'SELECT message FROM messages_' . $row['groupId'] . ' LIMIT 1';
-            $result2 = $conn->query($query2);
-            if (!$result2) {
-                throw new Exception('Error checking for existing username. ' . $conn->error);
+                $query2 = 'SELECT message FROM messages_' . $row['groupId'] . ' LIMIT 1';
+                $result2 = $conn->query($query2);
+                if (!$result2) {
+                    throw new Exception('Error checking for existing username. ' . $conn->error);
+                }
+                $result2->data_seek(0);
+                $row2 = $result2->fetch_array(MYSQLI_ASSOC);
+
+                echo '<td>' . $row2['message'] . '</td>';
+
+                echo '<td>' . '<a href="groups.php?g=' . $row['groupId'] . '">Select</a>' . '</td>';
+                echo '</tr>';
             }
-            $result2->data_seek(0);
-            $row2 = $result2->fetch_array(MYSQLI_ASSOC);
-
-            echo '<td>' . $row2['message'] . '</td>';
-
-            echo '<td>' . '<a href="groups.php?g=' . $row['groupId'] . '">Select</a>' . '</td>';
-            echo '</tr>';
         }
+        echo "</table>\n";
+    } else {
+        echo "<p>There's nothing here right now. <a href='create_group.php'>Create a group.</a></p>";
     }
-    echo "</table>\n</section>";
+    echo "</section>";
 
     $query = 'SELECT * from groups WHERE gType="1"';
 
@@ -71,7 +77,7 @@ try {
         echo '<td>' . $row['groupName'] . '</td>';
         echo '<td>' . $row['groupDesc'] . '</td>';
 
-        $query2 = 'SELECT message FROM messages_' .$row['groupId']. ' LIMIT 1';
+        $query2 = 'SELECT * FROM messages_'.$row['groupId'].' WHERE messageId=(SELECT MAX(messageId) FROM messages_'.$row['groupId'].')';
         $result2 = $conn->query($query2);
         if (!$result2) {
             throw new Exception('Error checking for existing username. ' . $conn->error);
