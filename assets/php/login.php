@@ -60,6 +60,7 @@ else {
       $_SESSION['avatarImage'] = $row['avatarImage'];
       $_SESSION['phoneNumber'] = $row['phoneNumber'];
       $_SESSION['emailAddress'] = $row['emailAddress'];
+      $_SESSION['password'] = $row['passwordHash'];
 
       header('Location: user_profile.php');
     }
