@@ -37,10 +37,11 @@
     </div>
   </header>
 
+  <?php require_once __DIR__.'/assets/php/check_login.php'?>
   <div class="bg-pageheader">
     <div class="container">
-      <h1>figure out some way to print the group name here</h1>
-      <h3>cause it'd be cool</h3>
+      <h1><?php echo lookupGroupName($_SESSION['groupId']);?></h1>
+      <h3><?php echo lookupGroupDesc($_SESSION['groupId']);?></h3>
     </div>
   </div>
 
@@ -57,7 +58,8 @@
         <div class="col-md-3">
           <?php require_once __DIR__ . '/assets/php/user_profile_list.php';
           require_once __DIR__ . '/assets/php/user_profile_list.php';
-          require_once __DIR__ . '/assets/php/add_user.php'; ?>
+          require_once __DIR__ . '/assets/php/add_user.php';
+          require_once __DIR__ . '/assets/php/remove_user.php';?>
         </div>
       </div>
     </div>
