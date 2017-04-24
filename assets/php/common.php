@@ -239,3 +239,18 @@ function groupPrivate($groupId) {
 
     return ($row['gType'] == "1") ? false : true;
 }
+
+function checkPassword($uid, $password) {
+    global $conn;
+    $query = 'SELECT passwordHash FROM users WHERE userId="'.$uid.'" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking password. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return ($row['passwordHash'] == $password) ? false : true;
+}
