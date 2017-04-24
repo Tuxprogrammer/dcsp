@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
                 $query = 'SELECT avatarImage FROM users WHERE userId=' . $_SESSION['userId'] . ' LIMIT 1';
                 $result = $conn->query($query);
                 if (!$result) {
-                    throw new Exception('Error deleting old avatar image.' . $conn->error);
+                    throw new RuntimeException('Error deleting old avatar image.' . $conn->error);
                 }
                 $result->data_seek(0);
                 $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
 
                 $result = $conn->query($query);
                 if (!$result) {
-                    throw new Exception('Error editing avatar image url.' . $conn->error);
+                    throw new RuntimeException('Error editing avatar image url.' . $conn->error);
                 }
 
 
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
 
                 $result = $conn->query($query);
                 if (!$result) {
-                    throw new Exception('Error editing avatar image url.' . $conn->error);
+                    throw new RuntimeException('Error editing avatar image url.' . $conn->error);
                 }
             }
 
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
         $result = $conn->query($query);
         if (!$result) {
             echo $query;
-            throw new Exception('Error updaing database field. ' . $conn->error);
+            throw new RuntimeException('Error updaing database field. ' . $conn->error);
         }
 
         $_SESSION[$_POST['param']] = $_POST['value'];

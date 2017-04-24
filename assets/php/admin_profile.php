@@ -26,7 +26,7 @@ for ($j = 0; $j < $rows; ++$j) {
     $query2 = "SELECT message FROM messages_" . $row["groupId"] . " LIMIT 1";
     $result2 = $conn->query($query2);
     if (!$result2)
-        throw new Exception("Error checking for existing username. " . ($conn->error));
+        throw new RuntimeException("Error checking for existing username. " . ($conn->error));
     $result2->data_seek(0);
     $row2 = $result2->fetch_array(MYSQLI_ASSOC);
 

@@ -12,7 +12,7 @@ try {
     unset($hostname, $username, $password, $db);
 
     if ($conn->connect_error) {
-        throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+        throw new RuntimeException('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
     }
 } catch (Exception $e) {
     echo "<h1>$e</h1>";

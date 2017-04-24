@@ -14,7 +14,7 @@ function lookupUserName($userId)
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -30,7 +30,7 @@ function lookupUserId($userName)
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -46,7 +46,7 @@ function lookupGroupName($groupId)
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -74,7 +74,7 @@ function send_message($userId, $groupId, $message)
     global $conn;
 
     if ($conn->connect_error) {
-        throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+        throw new RuntimeException('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
     }
 
     /*
@@ -96,7 +96,7 @@ function send_message($userId, $groupId, $message)
     echo $query;
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error adding new message to database. ' . $conn->error);
+        throw new RuntimeException('Error adding new message to database. ' . $conn->error);
     }
 
 }
@@ -200,7 +200,7 @@ function uidInGroup($userId, $groupId) {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -215,7 +215,7 @@ function groupPrivate($groupId) {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for group type. ' . $conn->error);
+        throw new RuntimeException('Error checking for group type. ' . $conn->error);
     }
 
     $result->data_seek(0);

@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error adding new user. ' . $conn->error);
+        throw new RuntimeException('Error adding new user. ' . $conn->error);
     }
 
     //Put initial message in the group
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     echo $query;
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error adding new group to database. ' . $conn->error);
+        throw new RuntimeException('Error adding new group to database. ' . $conn->error);
     }
 
     header('Location: messages.php');

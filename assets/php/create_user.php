@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //Check if username exists already
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error checking for existing username. ' . $conn->error);
+            throw new RuntimeException('Error checking for existing username. ' . $conn->error);
         }
 
         $rows = $result->num_rows;
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = $result->fetch_array(MYSQLI_ASSOC);
 
             if ($userName === $row['userName']) {
-                throw new Exception('Error, username matches a user already on file.');
+                throw new RuntimeException('Error, username matches a user already on file.');
             }
         }
 
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error adding new user to database. ' . $conn->error);
+            throw new RuntimeException('Error adding new user to database. ' . $conn->error);
         }
 
         // Done

@@ -30,7 +30,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'upvote') {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for votes.' . $conn->error);
+        throw new RuntimeException('Error checking for votes.' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -43,7 +43,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'upvote') {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error updating votes.' . $conn->error);
+        throw new RuntimeException('Error updating votes.' . $conn->error);
     }
 
     header('Location: messages.php');
@@ -60,7 +60,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'downvote') {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for votes.' . $conn->error);
+        throw new RuntimeException('Error checking for votes.' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -73,7 +73,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'downvote') {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error updating votes.' . $conn->error);
+        throw new RuntimeException('Error updating votes.' . $conn->error);
     }
 
     header('Location: messages.php');
@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         unset($hostname, $username, $password, $db);
 
         if ($conn->connect_error) {
-            throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+            throw new RuntimeException('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
         }
 
         echo '<h1>'.lookupGroupName($_SESSION['groupId']) . '</h1>';

@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing username. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing username. ' . $conn->error);
     }
 
     $result->data_seek(0);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error removing user. ' . $conn->error);
+        throw new RuntimeException('Error removing user. ' . $conn->error);
     }
 
     //Put initial message in the group
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     echo $query;
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error inserting removal message. ' . $conn->error);
+        throw new RuntimeException('Error inserting removal message. ' . $conn->error);
     }
 
     header('Location: messages.php');

@@ -12,7 +12,7 @@ if (isset($_SESSION['userName'])) {
     unset($hostname, $username, $password, $db);
 
     if ($conn->connect_error) {
-        throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
+        throw new RuntimeException('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
     }
 //Checks if username and password have been set
     if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
@@ -40,7 +40,7 @@ if (isset($_SESSION['userName'])) {
 
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error authenticating user information. ' . $conn->error);
+            throw new RuntimeException('Error authenticating user information. ' . $conn->error);
         }
 
         $result->data_seek(0);

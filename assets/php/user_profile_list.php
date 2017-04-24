@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error collecting user profiles from database.' . $conn->error);
+        throw new RuntimeException('Error collecting user profiles from database.' . $conn->error);
     }
 
 //$result->data_seek(0);

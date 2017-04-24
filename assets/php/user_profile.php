@@ -18,7 +18,7 @@ $query = 'SELECT * FROM users WHERE userId=' . $userId . ' LIMIT 1';
 
 $result = $conn->query($query);
 if (!$result) {
-    throw new Exception('Error checking for existing user information. ' . $conn->error);
+    throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
 }
 
 $result->data_seek(0);
@@ -37,7 +37,7 @@ $query = 'SELECT groupId FROM member_of WHERE userId=' . $userId;
 
 $result = $conn->query($query);
 if (!$result) {
-    throw new Exception('Error checking for existing user information. ' . $conn->error);
+    throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
 }
 $rows = $result->num_rows;
 $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -55,7 +55,7 @@ foreach ($groupIds as $groupId) {
 
     $result = $conn->query($query);
     if (!$result) {
-        throw new Exception('Error checking for existing user information. ' . $conn->error);
+        throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
     }
 
     $result->data_seek(0);

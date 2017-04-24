@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $query;
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error adding new group to database. ' . $conn->error);
+            throw new RuntimeException('Error adding new group to database. ' . $conn->error);
         }
         $result = $conn->query('SELECT LAST_INSERT_ID()');
         if (!$result) {
-            throw new Exception('Error adding new group to database. ' . $conn->error);
+            throw new RuntimeException('Error adding new group to database. ' . $conn->error);
         }
 
         $result->data_seek(0);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $query;
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error adding new group to database. ' . $conn->error);
+            throw new RuntimeException('Error adding new group to database. ' . $conn->error);
         }
 
         // Set the current user as a member of the group
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $query;
         $result = $conn->query($query);
         if (!$result) {
-            throw new Exception('Error adding new group to database. ' . $conn->error);
+            throw new RuntimeException('Error adding new group to database. ' . $conn->error);
         }
 
 
