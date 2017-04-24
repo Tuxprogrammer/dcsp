@@ -23,10 +23,10 @@ else {
     $un_temp = mysql_entities_fix_string($conn, $username);
     $pw_temp = mysql_entities_fix_string($conn, $password);
 
-    foreach ([
+    foreach (array(
         'userName' => $username,
         'password' => $password
-    ] as $type => $field) {
+             ) as $type => $field) {
       $errors = validateField($field, $type);
       if ($errors['error']) {
         echo $errors['errorText'];
@@ -67,6 +67,5 @@ else {
       echo '<p>Invalid username/password combination</p>';
     }
   }
-
 }
 $conn->close();

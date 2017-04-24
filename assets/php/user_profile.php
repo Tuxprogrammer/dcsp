@@ -24,7 +24,7 @@ $emailAddress = $row['emailAddress'];
 $avatarImage = $row['avatarImage'];
 $phoneNumber = $row['phoneNumber'];
 
-$groupIds = [];
+$groupIds = array();
 
 
 $query = 'SELECT groupId FROM member_of WHERE userId=' . $userId;
@@ -43,7 +43,7 @@ for ($j = 0; $j < $rows; ++$j) {
   $groupIds[] = $row['groupId'];
 }
 
-$groupNames = [];
+$groupNames = array();
 foreach ($groupIds as $groupId) {
   $query = 'SELECT groupName, gType FROM groups WHERE groupId=' . $groupId . ' LIMIT 1';
 
