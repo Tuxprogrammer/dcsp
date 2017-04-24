@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
                     throw new Exception('Error editing avatar image url.' . $conn->error);
                 }
             }
-
+            header("Location: user_profile.php");
             die;
         }
 

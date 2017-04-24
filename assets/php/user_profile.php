@@ -74,7 +74,7 @@ foreach ($groupIds as $groupId) {
       <div id="userinfo">
 
         <img src="<?php echo $avatarImage; ?>" alt="Image not found">
-        <a href="">Edit Avatar</a>
+          <form action="user_profile.php" method="post"><input type="hidden" name="param" value="avatarImage"><button type="submit">Edit Avatar</button></form>
         <table>
           <tr>
             <th>Username:</th>
