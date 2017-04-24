@@ -26,7 +26,7 @@ header, nav {
 
 .bg-pageheader {
   background: midnightblue;
-  padding: 2rem 1rem; }
+  padding: 1rem 1rem; }
   .bg-pageheader h1 {
     color: #dddddd;
     font-weight: 300; }
@@ -40,9 +40,11 @@ header, nav {
 #login-form {
   padding: 1rem 0; }
   #login-form form {
-    padding: 2rem;
+    padding: 1rem;
     background-color: #98c4ba;
-    border-radius: 2rem; }
+    border-radius: 1rem; }
+  #login-form .form-group:last-of-type {
+    margin-bottom: 0; }
   #login-form .btn-login {
     background-color: seagreen;
     outline: none;

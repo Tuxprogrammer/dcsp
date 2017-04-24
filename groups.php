@@ -23,8 +23,11 @@
             <li class="nav-item">
               <a class="nav-link" href="./user_profile.php">Profile</a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./groups.php">View Groups<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about/">About</a>
+              <a class="nav-link" href="./create_group.php">Create Group</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">

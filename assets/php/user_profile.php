@@ -70,65 +70,53 @@ foreach ($groupIds as $groupId) {
 
 <div class="container">
   <div class="row" id="dashboard">
-    <div class="col-md-9">
+    <div class="col-md-4">
       <div id="userinfo">
-
-<img src="<?php if(!$avatarImage){echo "media/default_avatar.png";} else{echo $avatarImage;} ?>" alt="default_avatar.png">
-          <form action="user_profile.php" method="post"><input type="hidden" name="param" value="avatarImage"><button type="submit">Edit Avatar</button></form>
-        <table>
-          <tr>
-            <th>Username:</th>
-            <td><?php echo $userName; ?></td>
-            <td>
-              <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="userName"/></form>
-            </td>
-          </tr>
-          <tr>
-            <th>Name:</th>
-            <td><?php echo $realName; ?></td>
-            <td>
-              <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="realName"/></form>
-            </td>
-          </tr>
-          <tr>
-            <th>Email:</th>
-            <td><?php echo $emailAddress; ?></td>
-            <td>
-              <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="emailAddress"/></form>
-            </td>
-          </tr>
-          <tr>
-            <th>Phone Number:</th>
-            <td><?php echo $phoneNumber; ?></td>
-            <td>
-              <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="phoneNumber"/></form>
-            </td>
-          </tr>
-        </table>
-
-        <h2>Your cHats:</h2>
-        <?php
-        echo '<ul>';
-        foreach ($groupNames as $id => $name) {
-          echo '<li><a href="./groups.php?g=' . $id . '">' . $name . '</a></li>';
+        <img src="<?php if (!$avatarImage) {
+          echo "media/default_avatar.png";
         }
-        echo '</ul>';
-        ?>
+        else {
+          echo $avatarImage;
+        } ?>" alt="default_avatar.png">
+        <form action="user_profile.php" method="post"><input type="hidden" name="param" value="avatarImage">
+          <button type="submit">Edit Avatar</button>
+        </form>
+
+        <div id="profile-form">
+          <form action="" method="post">
+            <div class="form-group row">
+              <label for="username-input">Username</label>
+              <input class="form-control" type="text" name="username" value="<?php echo $userName; ?>" >
+            </div>
+            <div class="form-group row">
+              <label for="realname-input">Real Name</label>
+              <input class="form-control" type="text" name="realname" value="<?php echo $realName; ?>">
+            </div>
+            <div class="form-group row">
+              <label for="email-input">Email Address</label>
+              <input class="form-control" type="email" name="email" value="<?php echo $emailAddress; ?>">
+            </div>
+            <div class="form-group row">
+              <label for="phone-number-input">Phone Number</label>
+              <input class="form-control" type="tel" name="phone-number" value="<?php echo $phoneNumber; ?>">
+            </div>
+            <div class="form-group row justify-content-left">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button id="reset-btn" type="reset" class="btn btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="btn-group-vertical">
-        <a class="btn btn-primary" href="./groups.php" role="button">View Groups</a>
-        <a class="btn btn-primary" href="./create_group.php" role="button">Create Group</a>
-      </div>
+      <h2>Your cHats:</h2>
+      <?php
+      echo '<ul>';
+      foreach ($groupNames as $id => $name) {
+        echo '<li><a href="./groups.php?g=' . $id . '">' . $name . '</a></li>';
+      }
+      echo '</ul>';
+      ?>
     </div>
   </div>
 </div>

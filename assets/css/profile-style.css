@@ -23,7 +23,7 @@ header, nav {
 
 .bg-pageheader {
   background: midnightblue;
-  padding: 2rem 1rem; }
+  padding: 1rem 1rem; }
   .bg-pageheader h1 {
     color: #dddddd;
     font-weight: 300; }
@@ -44,6 +44,22 @@ header, nav {
     #dashboard .btn-primary:hover {
       background-color: #151554;
       border-color: #151554; }
+
+#profile-form {
+  padding: 1rem 0; }
+  #profile-form form {
+    padding: 1rem;
+    background-color: #98c4ba;
+    border-radius: 1rem; }
+    #profile-form form .row {
+      margin-right: 0;
+      margin-left: 0; }
+    #profile-form form > .form-group:last-of-type {
+      margin-bottom: 0; }
+  #profile-form label {
+    margin-bottom: 0.1rem; }
+  #profile-form .btn {
+    margin-right: 1rem; }
 
 .btn-danger {
   color: #dddddd;

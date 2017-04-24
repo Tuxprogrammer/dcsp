@@ -26,7 +26,10 @@
               <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about">About</a>
+              <a class="nav-link" href="./groups.php">View Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./create_group.php">Create Group</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
@@ -50,6 +53,5 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
           integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
           crossorigin="anonymous"></script>
-
 </body>
 </html>

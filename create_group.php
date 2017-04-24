@@ -27,7 +27,10 @@
               <a class="nav-link" href="./user_profile.php">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about/">About</a>
+              <a class="nav-link" href="./groups.php">View Groups</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./create_group.php">Create Group<span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
@@ -50,18 +53,24 @@
       <form class="form-horizontal col-xs-12 col-lg-8" method="POST" action="create_group.php">
         <div class="form-group row">
           <label for="group-type-input" class="col-4 col-form-label">Group Type</label>
-          <select class="form-control col-8" id="group-type-input" name="gType" required>
-            <option value="1">Public</option>
-            <option value="2">Private</option>
-          </select>
+          <div class="col-8">
+            <select class="form-control" id="group-type-input" name="gType" required>
+              <option value="1">Public</option>
+              <option value="2">Private</option>
+            </select>
+          </div>
         </div>
         <div class="form-group row">
           <label for="group-name-input" class="col-4 col-form-label">Group Name</label>
-          <input class="form-control col-8" type="text" id="group-name-input" name="groupName" required>
+          <div class="col-8">
+            <input class="form-control" type="text" id="group-name-input" name="groupName" required>
+          </div>
         </div>
         <div class="form-group row">
           <label for="description-input" class="col-4 col-form-label">Description</label>
-          <input class="form-control col-8" type="text" id="description-input" name="groupDesc" required>
+          <div class="col-8">
+            <input class="form-control" type="text" id="description-input" name="groupDesc" required>
+          </div>
         </div>
         <div class="form-group row justify-content-center">
           <button type="submit" class="btn btn-primary">Submit</button>
