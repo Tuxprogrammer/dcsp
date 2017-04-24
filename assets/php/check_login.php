@@ -31,7 +31,8 @@ if(!isset($_SESSION['userId'], $_SESSION['userName'])) {
 //TODO: ADD STUFF HERE TO CHECK IF THESE ARE THE USERS WE ARE LOOKING FOR
 // ALSO, IF A USER IS VIEWING A GROUP, CHECK THAT THEY ARE A MEMBER OF THAT GROUP.
 
-if(isset($_SESSION['groupId']) && $_SESSION['groupId'] !== '0' && !uidInGroup($_SESSION['userId'], $_SESSION['groupId'])) {
+if(isset($_SESSION['groupId']) && !empty($_SESSION['groupId']) && $_SESSION['groupId'] !== '0' &&
+    !uidInGroup($_SESSION['userId'], $_SESSION['groupId'])) {
     echo 'You are not a part of this group.';
     $_SESSION['groupId'] = '0';
     die();
