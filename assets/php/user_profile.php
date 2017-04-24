@@ -55,7 +55,7 @@ foreach ($groupIds as $groupId) {
   $result->data_seek(0);
   $row = $result->fetch_array(MYSQLI_ASSOC);
 
-  if ($row['gType'] === '1') {
+  if (uidInGroup($_SESSION['userId'], $groupId)) {
     $groupNames[$groupId] = $row['groupName'];
   }
 }
