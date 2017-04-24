@@ -39,6 +39,22 @@ function lookupUserId($userName)
     return isset($row['userId']) ? $row['userId'] : '';
 }
 
+function lookupGroupName($groupId)
+{
+    global $conn;
+    $query = 'SELECT groupName FROM groups WHERE groupId="' . $groupId . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for existing username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['groupName']) ? $row['groupName'] : '';
+}
+
 function mysql_entities_fix_string($connection, $string)
 {
     return htmlentities(mysql_fix_string($string));
