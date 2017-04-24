@@ -4,6 +4,11 @@ require_once __DIR__ . '/mysql_login.php';
 require_once __DIR__ . '/check_login.php';
 require_once __DIR__ . '/common.php';
 
+if(!$_SERVER['REQUEST_METHOD'] === 'POST') {
+    header("Location: user_profile.php");
+    die;
+}
+
 function updateUserParam($param, $value)
 {
     global $conn;
@@ -131,7 +136,6 @@ if (isset($_POST['realName'])) {
 }
 if (isset($_POST['password'])) {
     updateUserParam('password', $_POST['password']);
-
 }
 if (isset($_POST['emailAddress'])) {
     updateUserParam('emailAddress', $_POST['emailAddress']);
