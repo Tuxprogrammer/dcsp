@@ -88,8 +88,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
         }
 
-        echo '<h1>'.lookupGroupName($_SESSION['groupId']) . '</h1>';
-
         echo '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="reset">
             <button type="submit" class="btn-link" name="">Back</button>
