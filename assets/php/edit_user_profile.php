@@ -63,9 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['param'])) {
 
                 // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
                 // Check MIME Type by yourself.
-                $finfo = new finfo(FILEINFO_MIME_TYPE);
+//                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $check = getimagesize($_FILES['upfile']['tmp_name']);
+                $finfo = '';
+                if($check !== false) {
+                    $finfo = $check['mime'];
+                }
+
                 if (false === $ext = array_search(
-                        $finfo->file($_FILES['upfile']['tmp_name']),
+                        $finfo,
                         array(
                             'jpg' => 'image/jpeg',
                             'png' => 'image/png',
