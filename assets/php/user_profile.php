@@ -3,6 +3,10 @@
 require_once __DIR__ . '/mysql_login.php';
 require_once __DIR__ . '/check_login.php';
 
+if($_SESSION['admin']==1){
+  header("Location: admin_profile.php");
+}
+
 $userId = $_SESSION['userId'];
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['u'])) {
   $userId = $_GET['u'];
