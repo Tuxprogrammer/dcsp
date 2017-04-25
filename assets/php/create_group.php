@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO groups (groupName, groupDesc, gTimeStamp, gType, creator)
               VALUES (\"$groupName\", \"$groupDesc\", NOW(), \"$gType\", \"$creator\")";
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new Exception('Error adding new group to database. ' . $conn->error);
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 message TEXT,
               PRIMARY KEY(messageId))';
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new Exception('Error adding new group to database. ' . $conn->error);
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO member_of (userId, groupId)
               VALUES (\"$creator\", \"$groupId\")";
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new Exception('Error adding new group to database. ' . $conn->error);
