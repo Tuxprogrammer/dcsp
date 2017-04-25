@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo "Invalid user.";
             die;
         } else {
-            $query = 'UPDATE SET banned=1 WHERE userId=' . $_GET['u'];
+            $query = 'UPDATE users SET banned=1 WHERE userId=' . $_GET['u'];
             $result = $conn->query($query);
             if (!$result) {
                 throw new Exception('Error banning user. ' . $conn->error);
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo "Invalid user.";
             die;
         } else {
-            $query = 'UPDATE SET banned=0 WHERE userId=' . $_GET['u'];
+            $query = 'UPDATE users SET banned=0 WHERE userId=' . $_GET['u'];
             $result = $conn->query($query);
             if (!$result) {
                 throw new Exception('Error unbanning user. ' . $conn->error);
