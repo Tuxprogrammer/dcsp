@@ -6,10 +6,11 @@
  * Time: 5:20 PM
  */
 
+require_once __DIR__.'/mysql_login.php';
+require_once __DIR__.'/check_login.php';
+require_once __DIR__.'/common.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once __DIR__.'/mysql_login.php';
-    require_once __DIR__.'/check_login.php';
-    require_once __DIR__.'/common.php';
 
     try {
 
