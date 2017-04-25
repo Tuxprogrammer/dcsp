@@ -1,0 +1,83 @@
+/* BASE */
+/* variables */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@font-face {
+  font-family: "Roboto", sans-serif; }
+body {
+  font-family: "Roboto", sans-serif; }
+
+html {
+  font-size: 12pt; }
+  @media (min-width: 700px) {
+    html {
+      font-size: 16pt; } }
+
+body {
+  background-color: #b8d6d0; }
+
+header, nav {
+  background-color: #0a8 !important; }
+
+.navbar {
+  padding: 0.5rem 0; }
+
+.bg-pageheader {
+  background: midnightblue;
+  padding: 1rem 1rem; }
+  .bg-pageheader h1 {
+    color: #dddddd;
+    font-weight: 300; }
+  .bg-pageheader h2 {
+    color: #e4e4e4;
+    font-weight: 300; }
+  .bg-pageheader h3 {
+    color: #b1b1b1;
+    font-weight: 300; }
+
+a {
+  text-decoration: none; }
+  a:hover {
+    text-decoration: none; }
+  a .group {
+    background-color: #82bcb0;
+    border-radius: 0.2rem;
+    margin: 0.5rem 0; }
+    a .group:hover {
+      background-color: #00A07E;
+      color: #292d29; }
+
+.row {
+  text-align: center; }
+
+.group {
+  background-color: #82bcb0;
+  border-radius: 0.2rem;
+  margin: 0.5rem 0; }
+  .group:hover {
+    background-color: #00A07E;
+    color: #292d29; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0; }
+
+section {
+  margin: 2rem 0; }
+  section a {
+    color: #333; }
+    section a:visited {
+      color: #fff; }
+  section a:hover {
+    color: #808080; }
+
+img {
+  width: 100%;
+  height: auto; }
+
+.btn-danger {
+  color: #dddddd;
+  font: inherit; }
+
+/*# sourceMappingURL=admin-profile-style.css.map */
