@@ -283,3 +283,18 @@ function lookupBanned($userId)
 
     return isset($row['banned']) ? $row['banned'] === '1' : '';
 }
+
+function checkAdmin($userId) {
+    global $conn;
+    $query = 'SELECT admin FROM users WHERE userId="' . $userId . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for banned username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['admin']) ? $row['admin'] === '1' : '';
+}

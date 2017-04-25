@@ -3,6 +3,11 @@ require_once __DIR__ . '/mysql_login.php';
 require_once __DIR__ . '/check_login.php';
 require_once __DIR__ . '/common.php';
 
+if (!checkAdmin($_SESSION['userId'])) {
+    header("Location: user_profile.php");
+    die();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['action']) && $_GET['action']==="del") {
 
