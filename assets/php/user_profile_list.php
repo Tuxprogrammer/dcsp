@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $rows = $result->num_rows;
     $thisuser = 'a';
-    echo '<ul>';
+    echo '<ul id="userlist">';
     for ($j = 0; $j < $rows; ++$j) {
         $result->data_seek($j);
         $row = $result->fetch_array(MYSQLI_ASSOC);

@@ -101,11 +101,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     header('Location: messages.php');
 }
+
+
 echo "<form action=\"messages.php\" method=\"post\" enctype='multipart/form-data'>
             <input type=\"hidden\" name=\"action\" value=\"send\">
             <input type=\"hidden\" name=\"userId\" value=\"" . $_SESSION['userId'] . '">
             <input type="hidden" name="groupId" value="' . $_SESSION['groupId'] . "\">
-            <input type=\"text\" name=\"message\">
-            Select Image: <input type='file' name='upfile' size='10'>
-            <button type=\"submit\" class=\"btn-link\" name=\"\">Send</button>
+            <div class='row'>
+              <div class=\"form-group col-md-12\">
+                <textarea class=\"form-control\" name='message' id=\"inputText\" rows=\"3\"></textarea>
+              </div>
+              <div class=\"form-group col-md-6\">
+                <input type='file' class='form-control-file' id='upfile' name='upfile' aria-describedby='fileHelp' size='10'>
+                <small id='fileHelp' class='form-text text-muted'>Note: Max file size of 10MB</small>
+              </div>
+              <div class='form-group col-md-6'>
+                <button type=\"submit\" class=\"btn btn-primary btn-lg\" name=\"\">Send</button>
+              </div>
+            </div>
           </form>";
