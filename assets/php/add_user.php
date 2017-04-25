@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $row = $result->fetch_array(MYSQLI_ASSOC);
     if(!empty($row['userId'])) {
         echo '<h1>User is already a member of this group.</h1>';
+
         header("Location: messages.php");
         die();
     }
