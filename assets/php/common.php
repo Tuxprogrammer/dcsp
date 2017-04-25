@@ -130,7 +130,7 @@ function checkBlank($field, $type)
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function checkInvalidChars($field, $type)
+function checkInvalidChars(&$field, $type)
 {
     $errorText = '';
     $error = false;
@@ -170,7 +170,7 @@ function checkInvalidChars($field, $type)
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function validateField($field, $type = '')
+function validateField(&$field, $type = '')
 {
     global $conn;
     $field = $conn->real_escape_string($field);
