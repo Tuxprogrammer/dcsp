@@ -70,19 +70,25 @@ foreach ($groupIds as $groupId) {
 
 <div class="container">
   <div class="row" id="dashboard">
-    <div class="col-md-4">
+    <div class="col-md-6 push-md-6">
       <div id="userinfo">
-        <img src="<?php if (!$avatarImage) {
-          echo "media/default_avatar.png";
-        }
-        else {
-          echo $avatarImage;
-        } ?>" alt="default_avatar.png">
-        <form action="user_profile.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="param" value="avatarImage">
-            <input type="file" name="upfile">
-
         <div id="profile-form">
+
+          <form action="" method="post" enctype='multipart/form-data'>
+            <h4>Settings</h4>
+            <div class="form-group row">
+              <div class="col-12">
+                  <img src="<?php if (!$avatarImage) {
+                    echo "media/default_avatar.png";
+                  }
+                  else {
+                    echo $avatarImage;
+                  } ?>" alt="default_avatar.png">
+              </div>
+              <label for="avatarImage-input">Avatar Image</label>
+              <input type="hidden" name="param" value="avatarImage">
+              <input class="form-control" type="file" name="upfile">
+            </div>
             <div class="form-group row">
               <label for="username-input">Username</label>
               <input class="form-control" type="text" name="userName" value="<?php echo $userName; ?>" >
@@ -107,7 +113,7 @@ foreach ($groupIds as $groupId) {
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6 pull-md-6">
       <h2>Your cHats:</h2>
       <?php
       echo '<ul>';

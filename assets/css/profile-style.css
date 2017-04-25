@@ -50,10 +50,17 @@ header, nav {
   #profile-form form {
     padding: 1rem;
     background-color: #98c4ba;
-    border-radius: 1rem; }
+    border-radius: 1rem;
+    text-align: center; }
     #profile-form form .row {
       margin-right: 0;
       margin-left: 0; }
+      #profile-form form .row img {
+        width: 100%;
+        height: auto;
+        padding: 0.2rem;
+        max-width: 15rem;
+        margin: auto; }
     #profile-form form > .form-group:last-of-type {
       margin-bottom: 0; }
   #profile-form label {
