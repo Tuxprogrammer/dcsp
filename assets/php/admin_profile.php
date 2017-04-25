@@ -80,7 +80,7 @@ echo '<div class="row row-header">
 for ($j = 0; $j < $rows; ++$j) {
   $result->data_seek($j);
   $row = $result->fetch_array(MYSQLI_ASSOC);
-  echo '<a href=\"admin_profile.php?action=del&g="' . $row['groupId'] . '"><div class="row group">';
+  echo '<a href="admin_profile.php?action=del&g=' . $row['groupId'] . '"><div class="row group">';
   echo '<div class="col-3"><span>' . $row['groupName'] . '</span></div>';
   echo '<div class="col-4"><span>' . $row['groupDesc'] . '</span></div>';
 
