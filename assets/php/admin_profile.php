@@ -11,6 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             die;
         }
 
+        $query = 'DROP TABLE messages_'.$_GET['g'];
+        $result = $conn->query($query);
+        if (!$result) {
+            throw new Exception('Error deleting group from database. ' . $conn->error);
+        }
+        $query = 'DELETE FROM groups WHERE groupId='.$_GET['g'];
+        $result = $conn->query($query);
+        if (!$result) {
+            throw new Exception('Error deleting group from database. ' . $conn->error);
+        }
+        $query = 'DELETE FROM member_of WHERE groupId='.$_GET['g'];
+        $result = $conn->query($query);
+        if (!$result) {
+            throw new Exception('Error deleting group from database. ' . $conn->error);
+        }
 
     }
 }
@@ -60,7 +75,7 @@ for ($j = 0; $j < $rows; ++$j) {
     echo '<tr>';
     echo '<td>' . $row['userName'] . '</td>';
     echo '<td>' . $row['realName'] . '</td>';
-    echo '<td>' . "<a href=\"admin_profile.php?g=" . $row['userId'] . "\">Delete</a>" . '</td>';
+    echo '<td>' . "<a href=\"admin_profile.php?action=ban&u=" . $row['userId'] . "\">Ban</a>" . '</td>';
     echo '</tr>';
 }
 echo "</table>";
