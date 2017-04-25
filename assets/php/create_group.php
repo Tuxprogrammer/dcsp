@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Done
         echo '<h1>Group added successfully. Thanks!';
-        header('refresh:3; url=groups.php');
+        header('Location: groups.php');
         die();
 
     } catch (Exception $e) {

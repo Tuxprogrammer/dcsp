@@ -24,7 +24,7 @@ function updateUserParam($param, $value)
 
     $result = $conn->query($query);
     if (!$result) {
-        echo $query;
+        //echo $query;
         throw new Exception('Error updaing database field. ' . $conn->error);
     }
 

@@ -111,7 +111,7 @@ function send_message($userId, $groupId, $message)
     $query = 'INSERT INTO messages_' . $groupId . " (fromUser, mTimeStamp, upvotes, downvotes, message)
               VALUES (\"$userId\", NOW(), \"0\", \"0\", \"$message\")";
 
-    echo $query;
+    //echo $query;
     $result = $conn->query($query);
     if (!$result) {
         throw new RuntimeException('Error adding new message to database. ' . $conn->error);

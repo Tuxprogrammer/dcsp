@@ -116,7 +116,7 @@ for ($j = 0; $j < $rows; ++$j) {
   echo '<div class="col-12 col-md-5"><span>' . $row['userName'] . '</span></div>';
   echo '<div class="col-12 col-md-5"><span>' . $row['realName'] . '</span></div>';
   if (!lookupBanned($row['userId'])) {
-    echo '<div class="col-2 col-md-2">' . "<a class='btn btn-danger' href=\"admin_profile.php?action=ban&u=" . $row['userId'] . "\">Ban</a>" . '</div>';
+    echo '<div class="col-2 col-md-2">' . '<a class="btn btn-danger" href="admin_profile.php?action=ban&u=' . $row['userId'] . '">Ban</a>' . '</div>';
   }
   else {
     echo '<div class="col-2 col-md-2"><a class="btn btn-warning" href="admin_profile.php?action=unban&u=' . $row['userId'] . '">Unban</a></div>';

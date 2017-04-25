@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
               mTimeStamp, upvotes, downvotes, message)
               VALUES (\"$fromUserId\", NOW(), 0, 0, \"$message\")";
 
-    echo $query;
+    //echo $query;
     $result = $conn->query($query);
     if (!$result) {
         throw new RuntimeException('Error adding new group to database. ' . $conn->error);
