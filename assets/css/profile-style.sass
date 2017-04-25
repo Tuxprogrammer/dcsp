@@ -1,0 +1,49 @@
+@import 00-tools/bourbon
+@import 01-base/base_dir
+
+#dashboard
+  margin: 1rem 0
+
+  .btn-primary
+    background-color: midnightblue
+    border-color: midnightblue
+    color: $brand-font-color
+    font: inherit
+
+    &:hover
+      background-color: #151554
+      border-color: #151554
+
+#profile-form
+  padding: 1rem 0
+
+  form
+    padding: 1rem
+    background-color: shade(tint($brand-background, 70%), 15%)
+    border-radius: 1rem
+    text-align: center
+
+    .row
+      margin-right: 0
+      margin-left: 0
+
+      img
+        width: 100%
+        height: auto
+        padding: 0.2rem
+        max-width: 15rem
+        margin: auto
+
+    > .form-group:last-of-type
+      margin-bottom: 0
+
+  label
+    margin-bottom: 0.1rem
+
+  .btn
+    margin-right: 1rem
+
+
+.btn-danger
+  color: $brand-font-color
+  font: inherit

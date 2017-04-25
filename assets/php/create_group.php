@@ -6,10 +6,11 @@
  * Time: 5:20 PM
  */
 
+require_once __DIR__.'/mysql_login.php';
+require_once __DIR__.'/check_login.php';
+require_once __DIR__.'/common.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once __DIR__.'/mysql_login.php';
-    require_once __DIR__.'/check_login.php';
-    require_once __DIR__.'/common.php';
 
     try {
 
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO groups (groupName, groupDesc, gTimeStamp, gType, creator)
               VALUES (\"$groupName\", \"$groupDesc\", NOW(), \"$gType\", \"$creator\")";
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new RuntimeException('Error adding new group to database. ' . $conn->error);
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 message TEXT,
               PRIMARY KEY(messageId))';
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new RuntimeException('Error adding new group to database. ' . $conn->error);
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO member_of (userId, groupId)
               VALUES (\"$creator\", \"$groupId\")";
 
-        echo $query;
+
         $result = $conn->query($query);
         if (!$result) {
             throw new RuntimeException('Error adding new group to database. ' . $conn->error);

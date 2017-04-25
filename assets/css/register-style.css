@@ -26,21 +26,25 @@ header, nav {
 
 .bg-pageheader {
   background: midnightblue;
-  padding: 2rem 1rem; }
+  padding: 1rem 1rem; }
   .bg-pageheader h1 {
     color: #dddddd;
     font-weight: 300; }
   .bg-pageheader h2 {
-    color: #e4e4e4; }
+    color: #e4e4e4;
+    font-weight: 300; }
   .bg-pageheader h3 {
-    color: #b1b1b1; }
+    color: #b1b1b1;
+    font-weight: 300; }
 
 #register-form {
   padding: 1rem 0; }
   #register-form form {
-    padding: 2rem;
+    padding: 1rem;
     background-color: #98c4ba;
-    border-radius: 2rem; }
+    border-radius: 1rem; }
+    #register-form form > .form-group:last-of-type {
+      margin-bottom: 0; }
   #register-form .btn {
     margin-right: 1rem; }
 

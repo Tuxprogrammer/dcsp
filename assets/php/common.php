@@ -55,6 +55,22 @@ function lookupGroupName($groupId)
     return isset($row['groupName']) ? $row['groupName'] : '';
 }
 
+function lookupGroupDesc($groupId)
+{
+    global $conn;
+    $query = 'SELECT groupDesc FROM groups WHERE groupId="' . $groupId . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for existing username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['groupDesc']) ? $row['groupDesc'] : '';
+}
+
 function mysql_entities_fix_string($string)
 {
     return htmlentities(mysql_fix_string($string));
@@ -63,7 +79,9 @@ function mysql_entities_fix_string($string)
 function mysql_fix_string($string)
 {
     global $conn;
-    if (get_magic_quotes_gpc()) {$string = stripslashes($string);}
+    if (get_magic_quotes_gpc()) {
+        $string = stripslashes($string);
+    }
     return $conn->real_escape_string($string);
 }
 
@@ -114,7 +132,7 @@ function checkBlank($field, $type)
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function checkInvalidChars($field, $type)
+function checkInvalidChars(&$field, $type)
 {
     $errorText = '';
     $error = false;
@@ -134,7 +152,7 @@ function checkInvalidChars($field, $type)
             }
             break;
         case ('emailAddress'):
-        echo 'YOU MADE IT!!' . '<br>';
+
             if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
                 $errorText = 'Invalid email format';
                 $error = true;
@@ -142,7 +160,7 @@ function checkInvalidChars($field, $type)
             break;
         case ('phoneNumber'):
             $field = preg_replace('/\D+/', '', $field);
-            if(strlen($field) > 12) {
+            if (strlen($field) > 12) {
                 $errorText = 'Invalid phone number';
                 $error = true;
             }
@@ -154,7 +172,7 @@ function checkInvalidChars($field, $type)
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function validateField($field, $type = '')
+function validateField(&$field, $type = '')
 {
     global $conn;
     $field = $conn->real_escape_string($field);
@@ -165,18 +183,24 @@ function validateField($field, $type = '')
         case 'userName' || 'realName' || 'emailAddress' || 'phoneNumber':
             //name is blank
             $errors = checkBlank($field, $type);
-            if ($errors['error']) {return $errors;}
+            if ($errors['error']) {
+                return $errors;
+            }
 
             //Name contains invalid characters
             $errors = checkInvalidChars($field, $type);
-            if ($errors['error']) {return $errors;}
+            if ($errors['error']) {
+                return $errors;
+            }
 
             break;
 
         case 'password':
             //passsword is blank
             $errors = checkBlank($field, $type);
-            if ($errors['error']) {return $errors;}
+            if ($errors['error']) {
+                return $errors;
+            }
 
             break;
 
@@ -188,15 +212,18 @@ function validateField($field, $type = '')
     return array('error' => $error, 'errorText' => $errorText);
 }
 
-function uidInGroup($userId, $groupId) {
+function uidInGroup($userId, $groupId)
+{
     global $conn;
-    $query = 'SELECT gType FROM groups WHERE groupId="'.$groupId.'" LIMIT 1';
+    $query = 'SELECT gType FROM groups WHERE groupId="' . $groupId . '" LIMIT 1';
     $result = $conn->query($query);
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
-    if(isset($row['gType']) && $row['gType'] === '1') {return 1;}
+    if (isset($row['gType']) && $row['gType'] === '1') {
+        return 1;
+    }
 
-    $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId='.$groupId.' LIMIT 1';
+    $query = 'SELECT * FROM member_of WHERE userId="' . $userId . '" AND groupId=' . $groupId . ' LIMIT 1';
 
     $result = $conn->query($query);
     if (!$result) {
@@ -209,9 +236,10 @@ function uidInGroup($userId, $groupId) {
     return isset($row['userId']) ? $row['userId'] : '';
 }
 
-function groupPrivate($groupId) {
+function groupPrivate($groupId)
+{
     global $conn;
-    $query = 'SELECT gType FROM groups WHERE groupId="'.$groupId.'" LIMIT 1';
+    $query = 'SELECT gType FROM groups WHERE groupId="' . $groupId . '" LIMIT 1';
 
     $result = $conn->query($query);
     if (!$result) {
@@ -222,4 +250,51 @@ function groupPrivate($groupId) {
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
     return $row['gType'] !== '1';
+}
+
+function checkPassword($uid, $password)
+{
+    global $conn;
+    $query = 'SELECT passwordHash FROM users WHERE userId="' . $uid . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking password. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return ($row['passwordHash'] == $password) ? true : false;
+}
+
+function lookupBanned($userId)
+{
+    global $conn;
+    $query = 'SELECT banned FROM users WHERE userId="' . $userId . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for banned username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['banned']) ? $row['banned'] === '1' : '';
+}
+
+function checkAdmin($userId) {
+    global $conn;
+    $query = 'SELECT admin FROM users WHERE userId="' . $userId . '" LIMIT 1';
+
+    $result = $conn->query($query);
+    if (!$result) {
+        throw new Exception('Error checking for banned username. ' . $conn->error);
+    }
+
+    $result->data_seek(0);
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+
+    return isset($row['admin']) ? $row['admin'] === '1' : '';
 }

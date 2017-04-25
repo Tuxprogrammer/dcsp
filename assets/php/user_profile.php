@@ -1,24 +1,18 @@
 <?php
-/**
- *
- * User: tuxpr
- * Date: 4/11/2017
- * Time: 6:22 PM
- */
 
 require_once __DIR__ . '/mysql_login.php';
 require_once __DIR__ . '/check_login.php';
 
 $userId = $_SESSION['userId'];
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['u'])) {
-    $userId = $_GET['u'];
+  $userId = $_GET['u'];
 }
 
 $query = 'SELECT * FROM users WHERE userId=' . $userId . ' LIMIT 1';
 
 $result = $conn->query($query);
 if (!$result) {
-    throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
+  throw new Exception('Error checking for existing user information. ' . $conn->error);
 }
 
 $result->data_seek(0);
@@ -37,86 +31,97 @@ $query = 'SELECT groupId FROM member_of WHERE userId=' . $userId;
 
 $result = $conn->query($query);
 if (!$result) {
-    throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
+  throw new Exception('Error checking for existing user information. ' . $conn->error);
 }
 $rows = $result->num_rows;
 $row = $result->fetch_array(MYSQLI_ASSOC);
 
 for ($j = 0; $j < $rows; ++$j) {
-    $result->data_seek($j);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+  $result->data_seek($j);
+  $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    $groupIds[] = $row['groupId'];
+  $groupIds[] = $row['groupId'];
 }
 
 $groupNames = array();
 foreach ($groupIds as $groupId) {
-    $query = 'SELECT groupName, gType FROM groups WHERE groupId=' . $groupId . ' LIMIT 1';
+  $query = 'SELECT groupName, gType FROM groups WHERE groupId=' . $groupId . ' LIMIT 1';
 
-    $result = $conn->query($query);
-    if (!$result) {
-        throw new RuntimeException('Error checking for existing user information. ' . $conn->error);
-    }
+  $result = $conn->query($query);
+  if (!$result) {
+    throw new Exception('Error checking for existing user information. ' . $conn->error);
+  }
 
-    $result->data_seek(0);
-    $row = $result->fetch_array(MYSQLI_ASSOC);
+  $result->data_seek(0);
+  $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    if ($row['gType'] === '1') {
-        $groupNames [] = $row['groupName'];
-    }
+  if (uidInGroup($_SESSION['userId'], $groupId)) {
+    $groupNames[$groupId] = $row['groupName'];
+  }
 }
 
 ?>
-<a href="groups.php">Back</a><br/>
-<img src="<?php echo $avatarImage; ?>" alt="Image not found">
-<form method="POST" action="user_profile.php">
-    <button class="btn-link">Edit Avatar</button>
-    <input type="hidden" name="param" value="avatarImage"/>
-</form>
-<table>
-    <tr>
-        <th>Username:</th>
-        <td><?php echo $userName; ?></td>
-        <td>
-            <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="userName"/></form>
-        </td>
-    </tr>
-    <tr>
-        <th>Name:</th>
-        <td><?php echo $realName; ?></td>
-        <td>
-            <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="realName"/></form>
-        </td>
-    </tr>
-    <tr>
-        <th>Email:</th>
-        <td><?php echo $emailAddress; ?></td>
-        <td>
-            <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="emailAddress"/></form>
-        </td>
-    </tr>
-    <tr>
-        <th>Phone Number:</th>
-        <td><?php echo $phoneNumber; ?></td>
-        <td>
-            <form method="POST" action="user_profile.php">
-                <button class="btn-link">Edit</button>
-                <input type="hidden" name="param" value="phoneNumber"/></form>
-        </td>
-    </tr>
-</table>
+<div class="bg-pageheader">
+  <div class="container">
+    <h1>Welcome, <?php echo $realName; ?></h1>
+    <h3>this is your cHat dashboard</h3>
+  </div>
+</div>
 
-<h2>My cHats:</h2>
-<?php
-echo '<ul>';
-foreach ($groupNames as $name) {
-    echo '<li>' . $name . '</li>';
-}
-echo '</ul>';
-?>
+<div class="container">
+  <div class="row" id="dashboard">
+    <div class="col-md-6 push-md-6">
+      <div id="userinfo">
+        <div id="profile-form">
+
+          <form action="" method="post" enctype='multipart/form-data'>
+            <h4>Settings</h4>
+            <div class="form-group row">
+              <div class="col-12">
+                  <img src="<?php if (!$avatarImage) {
+                    echo "media/default_avatar.png";
+                  }
+                  else {
+                    echo $avatarImage;
+                  } ?>" alt="default_avatar.png">
+              </div>
+              <label for="avatarImage-input">Avatar Image</label>
+              <input type="hidden" name="param" value="avatarImage">
+              <input class="form-control" type="file" name="upfile">
+            </div>
+            <div class="form-group row">
+              <label for="username-input">Username</label>
+              <input class="form-control" type="text" name="userName" value="<?php echo $userName; ?>" >
+            </div>
+            <div class="form-group row">
+              <label for="realname-input">Real Name</label>
+              <input class="form-control" type="text" name="realName" value="<?php echo $realName; ?>">
+            </div>
+            <div class="form-group row">
+              <label for="email-input">Email Address</label>
+              <input class="form-control" type="email" name="emailAddress" value="<?php echo $emailAddress; ?>">
+            </div>
+            <div class="form-group row">
+              <label for="phone-number-input">Phone Number</label>
+              <input class="form-control" type="tel" name="phoneNumber" value="<?php echo $phoneNumber; ?>">
+            </div>
+            <div class="form-group row justify-content-left">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button id="reset-btn" type="reset" class="btn btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 pull-md-6">
+      <h2>Your cHats:</h2>
+      <?php
+      echo '<ul>';
+      foreach ($groupNames as $id => $name) {
+        echo '<li><a href="./groups.php?g=' . $id . '">' . $name . '</a></li>';
+      }
+      echo '</ul>';
+      ?>
+    </div>
+  </div>
+</div>

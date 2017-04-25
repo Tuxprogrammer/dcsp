@@ -2,15 +2,40 @@
 @import 01-base/base_dir
 
 
-td, th
-  border: 1px solid black
-  padding: 1rem 1rem 1rem 1rem
+a
+  text-decoration: none
+
+  &:hover
+    text-decoration: none
+
+  .group
+    background-color: shade(tint($brand-background, 60%), 15%)
+    border-radius: 0.2rem
+    margin: 0.5rem 0
+
+    &:hover
+      background-color: #00A07E
+      color: #292d29
+
+.row
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 0.25rem 0
 
 section
   margin: 2rem 0
 
-a
-  color: #333
+  a
+    color: #333
 
-a:hover
-  color: #808080
+  a:hover
+    color: #808080
+
+img
+  width: 100%
+  height: auto
+
+.btn-danger
+  color: $brand-font-color
+  font: inherit

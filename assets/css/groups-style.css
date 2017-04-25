@@ -23,26 +23,48 @@ header, nav {
 
 .bg-pageheader {
   background: midnightblue;
-  padding: 2rem 1rem; }
+  padding: 1rem 1rem; }
   .bg-pageheader h1 {
     color: #dddddd;
     font-weight: 300; }
   .bg-pageheader h2 {
-    color: #e4e4e4; }
+    color: #e4e4e4;
+    font-weight: 300; }
   .bg-pageheader h3 {
-    color: #b1b1b1; }
+    color: #b1b1b1;
+    font-weight: 300; }
 
-td, th {
-  border: 1px solid black;
-  padding: 1rem 1rem 1rem 1rem; }
+a {
+  text-decoration: none; }
+  a:hover {
+    text-decoration: none; }
+  a .group {
+    background-color: #82bcb0;
+    border-radius: 0.2rem;
+    margin: 0.5rem 0; }
+    a .group:hover {
+      background-color: #00A07E;
+      color: #292d29; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0; }
 
 section {
   margin: 2rem 0; }
+  section a {
+    color: #333; }
+  section a:hover {
+    color: #808080; }
 
-a {
-  color: #333; }
+img {
+  width: 100%;
+  height: auto; }
 
-a:hover {
-  color: #808080; }
+.btn-danger {
+  color: #dddddd;
+  font: inherit; }
 
 /*# sourceMappingURL=groups-style.css.map */

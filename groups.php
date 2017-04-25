@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="charset" content="UTF-8">
+  <title>cHat</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/groups-style.css">
-
 </head>
 <body>
   <header>
@@ -19,16 +20,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./user_profile.php">Profile</a>
+            </li>
             <li class="nav-item active">
-              <a class="nav-link" href="./groups.php">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="./groups.php">View Groups<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about/">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./logout.php">Logout</a>
+              <a class="nav-link" href="./create_group.php">Create Group</a>
             </li>
           </ul>
+          <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
+            <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
+          </form>
         </div>
       </nav>
     </div>

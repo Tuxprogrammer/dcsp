@@ -1,9 +1,9 @@
 <?php
 
-$hostname = 'localhost';
-$db = 'sc2257';
-$username = 'sc2257';
-$password = 'dcsp_chat_password00';
+$hostname = 'pluto.cse.msstate.edu';
+$db = 'dcsph';
+$username = 'dcsph';
+$password = 'joeisthebest123';
 
 $conn = null;
 
