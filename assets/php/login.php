@@ -20,8 +20,8 @@ else {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $un_temp = mysql_entities_fix_string($conn, $username);
-    $pw_temp = mysql_entities_fix_string($conn, $password);
+    $un_temp = mysql_entities_fix_string($username);
+    $pw_temp = mysql_entities_fix_string($password);
 
     foreach (array(
         'userName' => $username,
