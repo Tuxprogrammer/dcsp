@@ -3,10 +3,6 @@
 require_once __DIR__ . '/mysql_login.php';
 require_once __DIR__ . '/check_login.php';
 
-if($_SESSION['admin']==1){
-  header("Location: admin_profile.php");
-}
-
 $userId = $_SESSION['userId'];
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['u'])) {
   $userId = $_GET['u'];
@@ -82,12 +78,11 @@ foreach ($groupIds as $groupId) {
         else {
           echo $avatarImage;
         } ?>" alt="default_avatar.png">
-        <form action="user_profile.php" method="post"><input type="hidden" name="param" value="avatarImage">
-          <button type="submit">Edit Avatar</button>
-        </form>
+        <form action="user_profile.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="param" value="avatarImage">
+            <input type="file" name="upfile">
 
         <div id="profile-form">
-          <form action="" method="post">
             <div class="form-group row">
               <label for="username-input">Username</label>
               <input class="form-control" type="text" name="userName" value="<?php echo $userName; ?>" >

@@ -103,7 +103,7 @@ for ($j = 0; $j < $rows; ++$j) {
     echo '<tr>';
     echo '<td>' . $row['userName'] . '</td>';
     echo '<td>' . $row['realName'] . '</td>';
-    echo '<td>' . "<a href=\"admin_profile.php?action=ban&u=" . $row['userId'] . "\">Ban</a>" . '</td><td><a href=\"admin_profile.php?action=unban?u=' . $row['userId'] . '>Unban</a></td>';
+    echo '<td>' . "<a href=\"admin_profile.php?action=ban&u=" . $row['userId'] . "\">Ban</a>" . '</td><td><a href="admin_profile.php?action=unban&u=' . $row['userId'] . '">Unban</a></td>';
     echo '</tr>';
 }
 echo "</table>";

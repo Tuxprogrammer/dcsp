@@ -39,7 +39,7 @@ if(isset($_SESSION['groupId']) && !empty($_SESSION['groupId']) && $_SESSION['gro
 }
 
 if(lookupBanned($_SESSION['userId'])) {
-    require_once __DIR__.'../../logout.php';
+    require_once __DIR__.'/../../logout.php';
     echo "<h1>You are banned.</h1>";
     die();
 }
