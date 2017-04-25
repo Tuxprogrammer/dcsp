@@ -31,15 +31,6 @@
             <li class="nav-item">
               <a class="nav-link" href="./create_group.php">Create Group</a>
             </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
-            <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
-        </div>
-      </nav>
-    </div>
-  </header>
-
   <?php
   require_once __DIR__ . '/assets/php/edit_user_profile.php';
   require_once __DIR__ . '/assets/php/user_profile.php';
