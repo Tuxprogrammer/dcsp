@@ -10,7 +10,7 @@
     <!-- TODO: GET RID OF THIS INLINE STYLE -->
     <style>
         td,th {
-            border: 1px solid black;
+            border: 1px solid white;
             padding: 1em 1em 1em 1em;
         }
         a {
@@ -49,6 +49,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./groups.php">View Groups</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./create_group.php">Create Group</a>
                 </li>
                 <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
                   <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
