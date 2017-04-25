@@ -38,6 +38,6 @@ if(isset($_SESSION['groupId']) && !empty($_SESSION['groupId']) && $_SESSION['gro
     die();
 }
 
-if(checkBanned($_SESSION['userId'])) {
+if(lookupBanned($_SESSION['userId'])) {
     require_once __DIR__.'../../logout.php';
 }
