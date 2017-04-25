@@ -152,7 +152,7 @@ function checkInvalidChars(&$field, $type)
             }
             break;
         case ('emailAddress'):
-            echo 'YOU MADE IT!!' . '<br>';
+
             if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
                 $errorText = 'Invalid email format';
                 $error = true;
