@@ -107,10 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Error adding new user to database. ' . $conn->error);
         }
 
-        // Done
-        //echo '<h1>User added successfully. Thanks!';
 
-        // TODO: Implement user profile page, and redirect user to there, as well as log them in
         header('Location: login.php');
     } catch (Exception $e) {
         echo "<h1>$e</h1>";

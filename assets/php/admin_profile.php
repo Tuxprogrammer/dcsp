@@ -4,7 +4,15 @@ require_once __DIR__ . '/check_login.php';
 require_once __DIR__ . '/common.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['action'])) {}
+    if (isset($_GET['action']) && $_GET['action']==="del") {
+
+        if (isset($_GET['g']) && !lookupGroupName($_GET['g'])) {
+            echo "Invalid group.";
+            die;
+        }
+
+
+    }
 }
 
 $query = 'SELECT * FROM groups';
@@ -32,7 +40,7 @@ for ($j = 0; $j < $rows; ++$j) {
 
     echo '<td>' . $row2['message'] . '</td>';
 
-    echo '<td>' . "<a href=\"admin_profile.php?g=" . $row['groupId'] . "\">Delete</a>" . '</td>';
+    echo '<td>' . "<a href=\"admin_profile.php?action=del&g=" . $row['groupId'] . "\">Delete</a>" . '</td>';
     echo '</tr>';
 }
 echo "</table>";
