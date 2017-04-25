@@ -88,11 +88,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             throw new Exception('The server is currently experiencing difficulties connecting to the database. ' . $conn->connect_error);
         }
 
-        echo '<form action="messages.php" method="post">
-            <input type="hidden" name="action" value="reset">
-            <button type="submit" class="btn-link" name="">Back</button>
-          </form>';
-
         $groupId = $_SESSION['groupId'];
 
         $query = "SELECT * from messages_$groupId ORDER BY messageId DESC";
@@ -104,14 +99,19 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $rows = $result->num_rows;
 
-        echo '<table><tr><th>User</th><th>Message</th><th>up/down</th></tr>';
+        echo '<div class="col-md-12" id="messages-table">
+                <div class="row">
+                  <div class="col-md-2">User</div>
+                  <div class="col-md-9">Message</div>
+                  <div class="col-md-1"></div>
+                </div>';
         for ($j = 0; $j < $rows; ++$j) {
             $result->data_seek($j);
             $row = $result->fetch_array(MYSQLI_ASSOC);
-            echo '<tr>';
-            echo '<td>' . lookupUserName($row['fromUser']) . '</td>';
-            echo '<td>' . stripslashes($row['message']) . '</td>';
-            echo '<td>' .
+            echo '<div class="row">';
+            echo '<div class="col-md-2">' . lookupUserName($row['fromUser']) . '</div>';
+            echo '<div class="col-md-9">' . stripslashes($row['message']) . '</div>';
+            echo '<div class="col-md-1">' .
                 '<form action="messages.php" method="post">
             <input type="hidden" name="action" value="upvote">
             <input type="hidden" name="id" value="' . $row['messageId'] . '">
@@ -124,10 +124,10 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             <input type="hidden" name="action" value="downvote">
             <input type="hidden" name="id" value="' . $row['messageId'] . '">
             <button type="submit" class="btn-link" name="">&#9660;</button>
-          </form>' . '</td>';
-            echo '</tr>';
+          </form>' . '</div>';
+            echo '</div>';
         }
-        echo '</table>';
+        echo '</div>';
 
     } catch (Exception $e) {
         echo "<h1>$e</h1>";

@@ -70,9 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     header('Location: messages.php');
 }
-echo '<form action="messages.php" method="post">
-            Remove a user from this group. <br />
-            Username: <input type="text" name="userName" id="userName">
+echo '<form action="messages.php" method="post" class="form-inline">
+            <input type="text" name="userName" id="userName" placeholder="username" class="form-control small-input mb-2 mr-sm-2 mb-sm-0">
             <input type="hidden" name="action" value="remove">
-            <button type="submit" class="btn-link" name="">Remove</button>
+            <button type="submit" class="btn btn-warning btn-sm" name="">Remove</button>
           </form>';

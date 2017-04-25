@@ -26,7 +26,10 @@
               <a class="nav-link" href="./user_profile.php">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about/">About</a>
+              <a class="nav-link" href="./groups.php">View Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./create_group.php">Create Group</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="./logout.php" method="post">
@@ -48,18 +51,23 @@
 
   <div class="">
     <div class="container">
-      <div class="row">
-        <div class="col-md-9">
+      <div class="row" id="main-row">
+        <div class="col-md-3 push-md-9" id="users-side">
+          <h4>User List:</h4>
           <?php
-          require_once __DIR__ . '/assets/php/get_messages.php';
-          require_once __DIR__ . '/assets/php/send_message.php';
+          require_once __DIR__ . '/assets/php/user_profile_list.php'; ?>
+
+          <h4>Actions:</h4>
+          <?php
+          require_once __DIR__ . '/assets/php/add_user.php';
+          require_once __DIR__ . '/assets/php/remove_user.php';
           ?>
         </div>
-        <div class="col-md-3">
-          <?php require_once __DIR__ . '/assets/php/user_profile_list.php';
-          require_once __DIR__ . '/assets/php/user_profile_list.php';
-          require_once __DIR__ . '/assets/php/add_user.php';
-          require_once __DIR__ . '/assets/php/remove_user.php';?>
+        <div class="col-md-9 pull-md-3" id="message-side">
+          <?php
+          require_once __DIR__ . '/assets/php/send_message.php';
+          require_once __DIR__ . '/assets/php/get_messages.php';
+          ?>
         </div>
       </div>
     </div>
