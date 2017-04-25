@@ -3,7 +3,7 @@
 $hostname = 'pluto.cse.msstate.edu';
 $db = 'dcsph';
 $username = 'dcsph';
-$password = 'ab1234';
+$password = 'joeisthebest123';
 
 $conn = null;
 
