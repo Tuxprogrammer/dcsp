@@ -90,19 +90,19 @@ foreach ($groupIds as $groupId) {
           <form action="" method="post">
             <div class="form-group row">
               <label for="username-input">Username</label>
-              <input class="form-control" type="text" name="username" value="<?php echo $userName; ?>" >
+              <input class="form-control" type="text" name="userName" value="<?php echo $userName; ?>" >
             </div>
             <div class="form-group row">
               <label for="realname-input">Real Name</label>
-              <input class="form-control" type="text" name="realname" value="<?php echo $realName; ?>">
+              <input class="form-control" type="text" name="realName" value="<?php echo $realName; ?>">
             </div>
             <div class="form-group row">
               <label for="email-input">Email Address</label>
-              <input class="form-control" type="email" name="email" value="<?php echo $emailAddress; ?>">
+              <input class="form-control" type="email" name="emailAddress" value="<?php echo $emailAddress; ?>">
             </div>
             <div class="form-group row">
               <label for="phone-number-input">Phone Number</label>
-              <input class="form-control" type="tel" name="phone-number" value="<?php echo $phoneNumber; ?>">
+              <input class="form-control" type="tel" name="phoneNumber" value="<?php echo $phoneNumber; ?>">
             </div>
             <div class="form-group row justify-content-left">
               <button type="submit" class="btn btn-primary">Submit</button>

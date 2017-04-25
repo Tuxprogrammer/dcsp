@@ -252,5 +252,5 @@ function checkPassword($uid, $password) {
     $result->data_seek(0);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-    return ($row['passwordHash'] == $password) ? false : true;
+    return ($row['passwordHash'] == $password) ? true : false;
 }

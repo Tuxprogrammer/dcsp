@@ -14,8 +14,8 @@ function updateUserParam($param, $value)
     global $conn;
 
     if (!checkPassword($_SESSION['userId'], $_SESSION['password'])) {
-        require_once __DIR__ . '/../../logout.php';
-        die();
+        //require_once __DIR__ . '/../../logout.php';
+        //die();
     }
     $errors = validateField($value, $param);
 
@@ -132,10 +132,7 @@ if (isset($_POST['userName'])) {
     updateUserParam('userName', $_POST['userName']);
 }
 if (isset($_POST['realName'])) {
-    updateUserParam('realName', $_POST['userName']);
-}
-if (isset($_POST['password'])) {
-    updateUserParam('password', $_POST['password']);
+    updateUserParam('realName', $_POST['realName']);
 }
 if (isset($_POST['emailAddress'])) {
     updateUserParam('emailAddress', $_POST['emailAddress']);
