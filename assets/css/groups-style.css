@@ -39,12 +39,18 @@ a {
   a:hover {
     text-decoration: none; }
   a .group {
-    background-color: #7db2ff;
+    background-color: #82bcb0;
     border-radius: 0.2rem;
     margin: 0.5rem 0; }
     a .group:hover {
-      background-color: #688BC3;
+      background-color: #00A07E;
       color: #292d29; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0; }
 
 section {
   margin: 2rem 0; }
@@ -52,6 +58,10 @@ section {
     color: #333; }
   section a:hover {
     color: #808080; }
+
+img {
+  width: 100%;
+  height: auto; }
 
 .btn-danger {
   color: #dddddd;

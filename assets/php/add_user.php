@@ -71,9 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     header('Location: messages.php');
 }
-echo '<form action="messages.php" method="post">
-            Add a user to this group. <br />
-            Username: <input type="text" name="userName" id="userName">
-            <input type="hidden" name="action" value="add">
-            <button type="submit" class="btn-link" name="">Add</button>
-          </form>';
+echo '<form action="messages.php" method="post" class="form-inline">
+        <input type="text" name="userName" id="userName" placeholder="username" class="form-control small-input mb-2 mr-sm-2 mb-sm-0">
+        <input type="hidden" name="action" value="add">
+        <button type="submit" class="btn btn-success btn-sm" name="">Add</button>
+      </form>';

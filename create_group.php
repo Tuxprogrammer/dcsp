@@ -52,8 +52,8 @@
     <div class="row justify-content-center">
       <form class="form-horizontal col-xs-12 col-lg-8" method="POST" action="create_group.php">
         <div class="form-group row">
-          <label for="group-type-input" class="col-4 col-form-label">Group Type</label>
-          <div class="col-8">
+          <label for="group-type-input" class="col-md-4 col-form-label">Group Type</label>
+          <div class="col-md-8">
             <select class="form-control" id="group-type-input" name="gType" required>
               <option value="1">Public</option>
               <option value="2">Private</option>
@@ -61,14 +61,14 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="group-name-input" class="col-4 col-form-label">Group Name</label>
-          <div class="col-8">
+          <label for="group-name-input" class="col-md-4 col-form-label">Group Name</label>
+          <div class="col-md-8">
             <input class="form-control" type="text" id="group-name-input" name="groupName" required>
           </div>
         </div>
         <div class="form-group row">
-          <label for="description-input" class="col-4 col-form-label">Description</label>
-          <div class="col-8">
+          <label for="description-input" class="col-md-4 col-form-label">Description</label>
+          <div class="col-md-8">
             <input class="form-control" type="text" id="description-input" name="groupDesc" required>
           </div>
         </div>
@@ -79,6 +79,14 @@
       </form>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+          integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+          integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+          integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+          crossorigin="anonymous"></script>
 </body>
 </html>
